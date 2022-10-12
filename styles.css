@@ -26,9 +26,6 @@ img{
     cursor: pointer;
 }
 
-img:hover{
-    opacity: 0.8;
-}
 
 /*The Nav Bar*/
 .navbar ul{
@@ -58,26 +55,30 @@ img:hover{
     display: none;
     cursor: pointer;
 }
-.navbar-links:hover{
+a:hover{
     background-color: lightgray;
     cursor: pointer;
     
 }
-.navbar-links:hover a{
+a:hover{
     color: black;
 }
 @media (max-width: 1250px){
     .navbar ul{
         flex-wrap: wrap;
     }
+    
     .navbar-toggle{
        display: block; 
     }
+    
+    
     .navbar-links{
         display: none;
         width: 100%;
         text-align: center;
     }
+    
     .active{
         display: block;
     }
@@ -131,3 +132,40 @@ img:hover{
     color: white;
     cursor: pointer;
 }
+
+/*Website sections*/
+#about{
+    display: center;
+    text-align:center;
+    margin-top: 60px;
+    background-image: url("sectionBackground.jpeg");
+    box-shadow: 0 0 4px 4px rgb(241, 240, 240) inset;
+    color: white;
+    text-shadow: 2px 2px 8px rgb(195, 116, 20);
+    padding: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+p{
+    display: inline-block;
+    width: 70%;
+    margin: 20px;
+}
+h2{
+    text-shadow: 2px 2px 8px rgb(2, 162, 255);
+    font-size: large;
+}
+
+/*Sticky Navbar*/
+.sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+  
+  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+    padding-top: 100px;
+}
+
+
+

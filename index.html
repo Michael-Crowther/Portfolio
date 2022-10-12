@@ -7,34 +7,80 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script> 
+    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/372c14e565.js" crossorigin="anonymous"></script>
 </head>
 
 
 <body>
-<nav class="navbar">
-    <ul>
-        <li class="navbar-logo">Michael Crowther</li>
-        <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
-        <li class="navbar-links"><a href="#about">Home</a></li>
-        <li class="navbar-links"><a href="#about">About</a></li>
-        <li class="navbar-links"><a href="#resume">Resumé</a></li>
-        <li class="navbar-links"><a href="#projects">Projects</a></li>
-        <li class="navbar-links"><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
 
-<img id="myImg" src="ProfilePicture.png" alt="Michael Crowther">
+    <section id="Home">
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li class="navbar-logo">Michael Crowther</li>
+                <li class="navbar-toggle"><i class="fas fa-bars"></i></li>
+                <a class="navbar-links" href="#Home">
+                    <li>Home</li>
+                </a>
+                <a class="navbar-links" href="#about">
+                    <li>About</li>
+                </a>
+                <a class="navbar-links" href="#resume">
+                    <li>Resumé</li>
+                </a>
+                <a class="navbar-links" href="#projects">
+                    <li>Projects</li>
+                </a>
+                <a class="navbar-links" href="#contact">
+                    <li>Contact</li>
+                </a>
+            </ul>
+
+        </nav>
+
+        <img id="myImg" src="ProfilePicture.png" alt="Michael Crowther">
+
+    </section>
 
 
-<div id="myModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="img01">
-    <div id="caption"></div>
-</div>
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
 
-<script src="script.js"></script>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Born and raised in Portland, Oregon, I've relocated to Utah for new experiences and to pursue a career in
+            Computer Science.
+            Growing up, I was very active in my community, participating in many high school sports teams such as
+            soccer, lacrosse, and marching band.
+            One of my biggest achievements in life was earning the rank of an Eagle Scout. The lessons taught within
+            that community are some I still use today.
+        </p>
+        <p>
+            Naturally, I'm a musican and creator. Some accolades worth mentioning include the three Oregon State Jazz
+            Saxophonist awards obtained in my latter years
+            of high school. The creativity within musicianship later translated to the development of software and
+            experimentation of game development.
+        </p>
+        <p>
+            I'm proud to say that after three years of development, testing, and debugging in the Unity software, my
+            first player horror experience is published and
+            available on Steam. More recently, I've been delving into the world of VR. I anticipate that one day I will
+            be involved with upcoming development
+            in XR for I believe it's the future of portable devices.
+        </p>
+    </section>
+
+    <section id="resume"></section>
+
+    <section id="projects"></section>
+
+    <section id="contact"></section>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
