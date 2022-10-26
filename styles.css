@@ -29,6 +29,11 @@ img{
     outline: 2px solid;
     cursor: pointer;
 }
+figcaption{
+    display: center;
+    text-align:center;
+    margin:13px;
+}
 
 
 /*The Nav Bar*/
@@ -70,16 +75,20 @@ a:hover{
 }
 @media (max-width: 1250px){
     
+    .grid-container > iframe{
+        margin-top: 20px;
+        width: 250px;
+        height: 200px;
+        grid-template-columns: auto;
+    }
+
     .navbar ul{
         flex-wrap: wrap;
     }
     
     .navbar-toggle{
        display: block; 
-    }
-
-    
-    
+    }   
     
     .navbar-links{
         display: none;
@@ -89,11 +98,6 @@ a:hover{
     
     .active{
         display: block;
-    }
-
-    #projects iframe{
-        width: 350px;
-        height: 200px;
     }
     
 }
@@ -147,6 +151,7 @@ a:hover{
     cursor: pointer;
 }
 
+
 /*Website sections*/
 #Home{
     scroll-margin-top: 200px;
@@ -182,11 +187,7 @@ h2{
     padding: 30px;
     margin-top: 80px;
 }
-.videos > iframe{
-    margin-top: 20px;
-    width: 500px;
-    height: 400px;
-}
+
 
 #projects{
     scroll-margin-top: 155px;
@@ -201,9 +202,21 @@ h2{
 }
 .grid-container{
     display: grid;
-    grid-template-columns: repeat(auto-fill, 1fr);
-    margin: 20px;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    grid-gap: 50px;
+    /*margin: 20px;*/
+    /*gap: 20px;*/    
 }
+
+.grid-container > iframe{
+    margin-top: 20px;
+    width: 500px;
+    height: 400px;
+}
+
+
 
 /*Sticky Navbar*/
 
