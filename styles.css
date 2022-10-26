@@ -74,13 +74,6 @@ a:hover{
     color: black;
 }
 @media (max-width: 1250px){
-    
-    .grid-container > iframe{
-        margin-top: 20px;
-        width: 250px;
-        height: 200px;
-        grid-template-columns: auto;
-    }
 
     .navbar ul{
         flex-wrap: wrap;
@@ -186,6 +179,7 @@ h2{
     text-align: center;
     padding: 30px;
     margin-top: 80px;
+    border-radius: 6px;
 }
 
 
@@ -200,22 +194,39 @@ h2{
     text-shadow: 2px 2px 8px rgb(195, 116, 20);
     padding: 30px;
 }
+
 .grid-container{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, 1fr);
     justify-items: center;
     align-items: center;
-    grid-gap: 50px;
-    /*margin: 20px;*/
-    /*gap: 20px;*/    
+    grid-gap: 50px;  
 }
 
 .grid-container > iframe{
     margin-top: 20px;
-    width: 500px;
+    width: 750px;
     height: 400px;
+    box-shadow: 3px 4px rgb(161, 160, 160);
+    border-radius: 6px;
 }
 
+@media (max-width: 1250px){
+
+    .grid-container > iframe{ 
+        margin-top: 20px;
+        width: 450px;
+        height: 220px;
+    }
+}
+@media (max-width: 600px){
+
+    .grid-container > iframe{ 
+        margin-top: 20px;
+        width: 300px;
+        height: 180px;
+    }
+}
 
 
 /*Sticky Navbar*/

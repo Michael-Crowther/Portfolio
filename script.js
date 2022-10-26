@@ -60,4 +60,9 @@ window.addEventListener('load', function() {
         for (var i = 0; i < navbarLinks.length; i++) 
             navbarLinks[i].classList.toggle("active");
     });
+    navbarLinks.addEventListener("click", function() {
+      for (var i = 0; i < navbarLinks.length; i++) 
+            navbarLinks[i].classList.toggle("active");
+    });
 });
+
