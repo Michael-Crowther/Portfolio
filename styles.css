@@ -6,6 +6,10 @@
     font-size: large;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     background-image: url("background.jpg");
     background-position: center 0;
@@ -28,6 +32,7 @@ img{
 
 
 /*The Nav Bar*/
+
 .navbar ul{
     display: flex;
     width: 100%;
@@ -64,6 +69,7 @@ a:hover{
     color: black;
 }
 @media (max-width: 1250px){
+    
     .navbar ul{
         flex-wrap: wrap;
     }
@@ -71,6 +77,8 @@ a:hover{
     .navbar-toggle{
        display: block; 
     }
+
+    
     
     
     .navbar-links{
@@ -82,6 +90,12 @@ a:hover{
     .active{
         display: block;
     }
+
+    #projects iframe{
+        width: 350px;
+        height: 200px;
+    }
+    
 }
 
 
@@ -134,10 +148,15 @@ a:hover{
 }
 
 /*Website sections*/
+#Home{
+    scroll-margin-top: 200px;
+}
+
 #about{
+    scroll-margin-top: 155px;
     display: center;
     text-align:center;
-    margin-top: 60px;
+    margin-top: 80px;
     background-image: url("sectionBackground.jpeg");
     box-shadow: 0 0 4px 4px rgb(241, 240, 240) inset;
     color: white;
@@ -153,15 +172,47 @@ p{
 h2{
     text-shadow: 2px 2px 8px rgb(2, 162, 255);
     font-size: large;
+    margin: 10px;
+}
+
+#resume{
+    scroll-margin-top: 155px;
+    display: center;
+    text-align: center;
+    padding: 30px;
+    margin-top: 80px;
+}
+.videos > iframe{
+    margin-top: 20px;
+    width: 500px;
+    height: 400px;
+}
+
+#projects{
+    scroll-margin-top: 155px;
+    display: center;
+    text-align:center;
+    margin-top: 80px;
+    background-image: url("sectionBackground.jpeg");
+    box-shadow: 0 0 4px 4px rgb(241, 240, 240) inset;
+    color: white;
+    text-shadow: 2px 2px 8px rgb(195, 116, 20);
+    padding: 30px;
+}
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 1fr);
+    margin: 20px;
 }
 
 /*Sticky Navbar*/
+
 .sticky {
     position: sticky;
     top: 0;
     width: 100%;
 }
-  
+
   /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
 .sticky + .content {
     padding-top: 100px;
@@ -169,3 +220,47 @@ h2{
 
 
 
+/*Contact section */
+#contact{
+    display: center;
+    text-align: center;
+    padding: 30px;
+    margin: 20px;
+    margin-top: 80px;
+    border-radius: 5px;
+    background-color: #b6b5b554;
+}
+
+input[type=text], select, textarea {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid rgba(226, 224, 224, 0.566);
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+  
+  input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 750px) {
+    .column, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .navbar-logo{
+        font-size: 2.5rem;
+    }
+  }

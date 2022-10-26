@@ -53,8 +53,6 @@ function myFunction() {
 
 
 
-
-
 window.addEventListener('load', function() {
     const toggleButton = document.getElementsByClassName('navbar-toggle')[0];
     const navbarLinks  = document.getElementsByClassName('navbar-links');
