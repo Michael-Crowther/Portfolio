@@ -35,13 +35,13 @@ export default function ThemeSwitcher() {
           <Button
             size="icon"
             onClick={handleTheme}
-            className="h-10 w-10"
+            className="rounded-full"
             variant="ghost"
           >
             {resolvedTheme === "dark" ? (
-              <Moon className="size-7" />
+              <Moon className="size-8" />
             ) : (
-              <Sun color="black" className="size-7" />
+              <Sun color="black" className="size-8" />
             )}
           </Button>
         </TooltipTrigger>

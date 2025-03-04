@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased xl:overflow-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased xl:overflow-hidden h-screen`}
       >
         <ThemeProvider
           attribute="class"

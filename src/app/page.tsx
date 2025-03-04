@@ -12,6 +12,14 @@ import instagramDark from "../../public/instagramDark.svg";
 import instagramWhite from "../../public/instagramWhite.svg";
 import { useTheme } from "next-themes";
 import { useState } from "react";
+import { ArrowUpRight, Download } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
@@ -55,7 +63,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative h-screen w-full flex">
+    <div className=" h-screen w-full flex overflow-x-hidden">
       {/* Dynamic background effect that follows the mouse */}
       {resolvedTheme === "dark" && (
         <div
@@ -68,11 +76,11 @@ export default function Home() {
               "radial-gradient(circle, rgba(0, 0, 128, 0.3) 0%, rgba(0, 0, 128, 0) 60%)",
             transform: "translate(-50%, -50%)",
           }}
-          className="absolute pointer-events-none"
+          className="absolute pointer-events-none hidden sm:block"
         />
       )}
 
-      <div className="flex flex-col xl:flex-row xl:px-0 z-50">
+      <div className="flex flex-col xl:flex-row xl:px-0 z-50 ">
         <span className="w-1/6 hidden xl:block" />
         <ProfileSection />
         <ContentSection ref={contentSectionRef} />
@@ -85,16 +93,33 @@ function ProfileSection() {
   const { resolvedTheme } = useTheme();
 
   return (
-    <section className=" w-full p-16 xl:min-w-[460px] xl:max-w-[100px] xl:w-1/3 flex flex-col">
+    <section className="relative w-full p-16 xl:min-w-[460px] xl:max-w-[100px] xl:w-1/3 flex flex-col">
       <div className="flex flex-col items-start">
-        <p className="text-[40px] font-bold">Michael Crowther</p>
-        <p className="text-[22px]">Full Stack Engineer</p>
+        <p className="text-[29px] sm:text-[40px] font-bold">Michael Crowther</p>
+        <p className="text-[18px] sm:text-[22px]">Full Stack Engineer</p>
       </div>
+
+      {/* Absolutely positioned effect when on mobile screen */}
+      {resolvedTheme === "dark" && (
+        <div
+          style={{
+            width: "1000px",
+            height: "1000px",
+            background:
+              "radial-gradient(circle, rgba(0, 0, 128, 0.3) 0%, rgba(0, 0, 128, 0) 60%)",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+          className="absolute pointer-events-none block sm:hidden z-[-1]"
+        />
+      )}
+
       <div className="flex xl:justify-center mt-10">
         <Image
           src={imageUrl}
           alt="Profile Image"
-          className="rounded-full w-80 h-80 object-cover shadow-lg"
+          className="rounded-full sm:w-70 sm:h-70 w-60 h-60 object-cover shadow-lg"
         />
       </div>
       <p className="text-xl text-muted-foreground mt-10">
@@ -131,7 +156,7 @@ function ProfileSection() {
           <Image
             src={resolvedTheme === "dark" ? linkedInWhite : linkedInDark}
             alt="LinkedIn"
-            className="h-8 w-8"
+            //className="h-8 w-8"
           />
         </Button>
         <Button
@@ -148,9 +173,27 @@ function ProfileSection() {
           <Image
             src={resolvedTheme === "dark" ? instagramWhite : instagramDark}
             alt="Instagram"
-            className="h-8 w-8"
+            //className="h-8 w-8"
           />
         </Button>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="rounded-full"
+                onClick={() => {
+                  window.open("/resume.pdf", "_blank");
+                }}
+              >
+                <Download className="size-8" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Download Resumé</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
         <ThemeSwitcher />
       </section>
     </section>
@@ -164,8 +207,9 @@ const ContentSection = forwardRef<HTMLDivElement>((props, ref) => {
       className=" h-full w-full flex xl:overflow-auto max-h-screen"
     >
       <section className="xl:w-5/6 w-full">
-        <div className="w-full  p-20">
+        <div className="w-full p-8 sm:p-20">
           <About />
+          <Experience />
         </div>
       </section>
     </section>
@@ -176,7 +220,7 @@ ContentSection.displayName = "ContentSection";
 
 function About() {
   return (
-    <div>
+    <div className="mb-30">
       <p className="text-muted-foreground">
         I&apos;m a developer specializing in creating accessible, scalable, and
         robust software through thoughtfully designed user interfaces and
@@ -229,5 +273,100 @@ function About() {
         exploring the next must-play game on my PC or PlayStation.
       </p>
     </div>
+  );
+}
+
+function Experience() {
+  return (
+    <div className="space-y-15">
+      <ExperienceCard
+        date="OCTOBER 2023 - PRESENT"
+        title="Full Stack Software Engineer • Wyssling Consulting"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, perferendis quaerat culpa labore quam vero voluptate placeat veniam hic debitis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, perferendis quaerat culpa labore quam vero voluptate placeat veniam hic debitis"
+        tags={[
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Tailwind CSS",
+          "tRPC",
+          "Node.js",
+          "PostgreSQL",
+          "AWS",
+          "Drizzle",
+          "Prisma",
+          "Express.js",
+          "Swagger UI",
+        ]}
+        href="https://www.wysslingconsulting.com/"
+      />
+
+      <ExperienceCard
+        date="SEPTEMBER 2018 - MAY 2025"
+        title="Computer Science Student • Utah Valley University"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, perferendis quaerat culpa labore quam vero voluptate placeat veniam hic debitis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, perferendis quaerat culpa labore quam vero voluptate placeat veniam hic debitis"
+        tags={[
+          "C++",
+          "Python",
+          "OOP",
+          "AI",
+          "Software Engineering",
+          "Data Structures",
+          "Algorithms",
+          "Data Privacy",
+          "Databases",
+          "Software Design",
+          "Web Programming",
+          "Operating Systems",
+        ]}
+        href="https://www.uvu.edu/cs/"
+      />
+    </div>
+  );
+}
+
+type ExperienceCardProps = {
+  date: string;
+  title: string;
+  subtitle?: string;
+  description: string;
+  tags: string[];
+  href?: string;
+};
+
+function ExperienceCard(props: ExperienceCardProps) {
+  const { date, title, subtitle, description, tags, href } = props;
+
+  return (
+    <a
+      className="flex p-4 hover:bg-card hover:cursor-pointer group rounded-lg"
+      href={href}
+      target="_blank"
+    >
+      <section className="min-w-[230px]">
+        <p className="text-muted-foreground text-[12px]">{date}</p>
+      </section>
+
+      <section className="w-full flex flex-col gap-1">
+        <div className="flex items-center gap-2">
+          <p className="text-[18px] dark:group-hover:text-teal-300">{title}</p>
+          <ArrowUpRight
+            size={20}
+            className="dark:group-hover:text-teal-300 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1"
+          />
+        </div>
+        {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
+        <p className="text-muted-foreground">{description}</p>
+        <ul className="flex gap-1 mt-2 flex-wrap">
+          {tags.map((tag: string) => (
+            <Badge
+              key={tag}
+              className="dark:bg-teal-400/10 rounded-full bg-teal-300/40 leading-5 px-3 py-1 dark:text-teal-300 text-black"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </ul>
+      </section>
+    </a>
   );
 }
