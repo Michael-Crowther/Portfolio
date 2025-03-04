@@ -15,8 +15,8 @@ import { useState } from "react";
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
+  const contentSectionRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
-  const rightSectionRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
 
   useEffect(() => {
@@ -34,9 +34,9 @@ export default function Home() {
   // Listen for wheel events on the window
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (rightSectionRef.current) {
+      if (contentSectionRef.current) {
         // Add the delta value to scrollTop for smooth scrolling
-        rightSectionRef.current.scrollTop += e.deltaY;
+        contentSectionRef.current.scrollTop += e.deltaY;
       }
     };
 
@@ -74,14 +74,14 @@ export default function Home() {
 
       <div className="flex flex-col xl:flex-row xl:px-0 z-50">
         <span className="w-1/6 hidden xl:block" />
-        <LeftSection />
-        <RightSection ref={rightSectionRef} />
+        <ProfileSection />
+        <ContentSection ref={contentSectionRef} />
       </div>
     </div>
   );
 }
 
-function LeftSection() {
+function ProfileSection() {
   const { resolvedTheme } = useTheme();
 
   return (
@@ -157,7 +157,7 @@ function LeftSection() {
   );
 }
 
-const RightSection = forwardRef<HTMLDivElement>((props, ref) => {
+const ContentSection = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <section
       ref={ref}
@@ -165,122 +165,69 @@ const RightSection = forwardRef<HTMLDivElement>((props, ref) => {
     >
       <section className="xl:w-5/6 w-full">
         <div className="w-full  p-20">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque maiores
-          consequuntur a illo sequi necessitatibus aliquam veritatis corrupti
-          sunt eum iusto inventore, officiis quo unde tempora voluptas? Odio
-          quis pariatur rerum ab sequi? Nostrum, sint inventore. Veritatis id
-          cum nulla hic eius dignissimos sed deserunt perspiciatis labore
-          corrupti architecto, cupiditate eum, quisquam molestias numquam at.
-          Itaque eaque soluta possimus labore, corporis aspernatur ratione animi
-          exercitationem dolorum quo, earum sit impedit maxime ipsum dolor!
-          Harum vitae incidunt deserunt, quasi nihil delectus impedit porro!
-          Eius, eum nostrum? Qui adipisci ipsa sapiente? Eveniet maxime eaque
-          quidem dolorum, ab veritatis reprehenderit dolorem aliquid molestiae
-          enim perspiciatis est a sit consequatur facilis, nemo fugit, assumenda
-          architecto voluptatem expedita at vero cum natus temporibus. Amet
-          explicabo quidem eum sit quos, a iste minima perferendis vitae officia
-          quae facilis alias quasi ad, minus consequatur consequuntur ipsa
-          magnam maxime! Quos temporibus illum aut, enim unde placeat?
-          Recusandae eligendi autem commodi laboriosam minus? Itaque,
-          voluptatibus? Debitis excepturi recusandae ab, porro consectetur quos
-          sapiente nisi deserunt eaque perferendis tempore nemo voluptates
-          aspernatur itaque illo amet a molestiae molestias natus quae? Aliquid,
-          doloremque? Optio, et fuga mollitia libero exercitationem aspernatur
-          aliquam quod ipsum inventore suscipit harum! Accusamus, nisi. Quod
-          maiores voluptas iste possimus dolore, recusandae eligendi debitis
-          autem accusamus inventore non, molestiae at voluptatum suscipit
-          dolores cum temporibus modi neque minima? At aperiam ipsam ipsa
-          voluptate magnam voluptatum eveniet nulla ratione quas soluta iste eos
-          vel nostrum recusandae est, doloremque architecto quo nisi autem
-          provident? Suscipit nam vel ducimus modi consequatur, id quod? Iste,
-          quibusdam, alias inventore voluptates dicta rerum dignissimos, harum
-          corporis laudantium sed ad veniam. Est mollitia, minus tenetur iste
-          officiis quae qui accusamus aut consectetur odit magni recusandae
-          molestias ratione reprehenderit quisquam itaque placeat aspernatur,
-          inventore autem dolores magnam possimus. Minima a quod velit sunt
-          delectus doloribus iste illo vitae repudiandae quaerat, tempora, eum
-          ut. Cum odio aliquam ullam fugit ipsum beatae veritatis non cupiditate
-          sed doloribus repellat temporibus, laboriosam itaque vel officiis quod
-          consequatur ea a sunt exercitationem vitae similique voluptate. Eos
-          deleniti dignissimos commodi cum quidem quos, exercitationem
-          blanditiis iure soluta rem sunt accusantium asperiores cumque
-          inventore enim, hic ad quasi ipsam nulla at? Beatae quae, vitae ex
-          mollitia reprehenderit deleniti, pariatur alias aliquam debitis totam
-          est inventore cupiditate consequuntur dolorum voluptates corrupti sint
-          autem dolor magnam? Labore necessitatibus obcaecati consequatur quo
-          architecto iure impedit autem numquam? Ab natus quisquam vero nulla
-          alias officia fuga, iure libero quae ut aut molestias illum aliquid.
-          Ea cumque modi totam aut explicabo at dicta vero natus nostrum
-          blanditiis quia dolores consequuntur, quasi fugit nam maxime illo,
-          fuga eum voluptatibus in culpa maiores. Vero aliquam consectetur dolor
-          aliquid impedit reprehenderit cupiditate totam. Laborum aut asperiores
-          assumenda tempore minus. Unde, sunt cum ullam voluptatem perspiciatis
-          inventore deserunt quos cumque! Excepturi nihil recusandae dolorum
-          modi? At illum, eius fugit soluta corporis ratione, fuga nostrum
-          inventore hic sit a dolorum. Ullam voluptatibus facilis doloribus,
-          dolor dicta magnam, error commodi vero optio repellat recusandae, quae
-          voluptate! Molestiae sequi nobis repudiandae, autem voluptatem
-          eligendi esse corporis illo sit neque dolorem, tempore magni,
-          reiciendis beatae soluta ducimus doloribus ut voluptatibus aperiam! Ut
-          illum quod numquam fugiat incidunt rerum? Aliquid at eaque ratione
-          molestias ut autem ex! Ducimus deleniti veritatis assumenda eligendi
-          voluptatum id laborum fugiat non perspiciatis similique, quo hic
-          voluptatem numquam eos dolores! Nemo ea, quaerat, commodi hic quo quod
-          quos asperiores dolorem porro iusto officiis praesentium dolores
-          labore dicta, deleniti tempore optio reiciendis quasi repellat!
-          Deserunt sequi sed dolorem mollitia expedita aliquid vero corrupti
-          voluptatibus fugit pariatur. Odit asperiores dolorum fuga iste quaerat
-          harum in illo cum corrupti! Nobis distinctio vitae beatae quam
-          doloribus eos aperiam odit qui ea aspernatur officia suscipit
-          similique harum, deleniti fugiat illum fuga laborum iste repellendus
-          obcaecati, optio eligendi repudiandae rem! Adipisci veniam quidem
-          laudantium exercitationem ducimus impedit itaque minima totam commodi
-          dolor, iste temporibus incidunt voluptates reprehenderit soluta, atque
-          debitis ex. Officiis fuga reprehenderit alias atque sint, maiores
-          necessitatibus neque possimus, placeat quam soluta! Enim magni
-          incidunt cum consequuntur distinctio quidem dolor quis cupiditate vel
-          facere harum eligendi quisquam, accusamus porro officiis nulla
-          voluptatem, quae deleniti soluta magnam asperiores reprehenderit at
-          velit. Id tempore rerum perferendis consequuntur delectus tempora unde
-          harum! Unde tenetur illum autem repudiandae rerum atque eos, ipsa
-          laboriosam deleniti, facilis vero dolor est voluptate fugiat. Commodi
-          harum voluptatibus facere. Aliquid dolore id saepe quaerat placeat
-          odio nisi odit perspiciatis maxime cupiditate unde obcaecati at esse
-          debitis quae iusto, incidunt quibusdam tempora ut praesentium atque!
-          Velit amet eaque laborum, nihil quasi alias porro inventore dolorem
-          cupiditate labore fugiat rerum cumque earum saepe ut provident fugit
-          aliquam quam deserunt ipsam ea architecto odit. Libero laboriosam
-          error obcaecati dolores necessitatibus rem assumenda dolorem maxime
-          consequatur aliquam maiores quae culpa iusto, in voluptates? Libero
-          facilis molestiae et ea totam quam qui ab dolorum quidem obcaecati
-          asperiores voluptate harum neque atque iusto eius beatae recusandae
-          numquam illo nobis itaque soluta, assumenda dicta corrupti. Labore
-          molestiae asperiores voluptas optio quidem expedita excepturi nobis
-          harum officiis consectetur eveniet non a sint ab consequatur, tenetur
-          nulla perferendis tempore est porro eos? Quasi possimus excepturi
-          assumenda, ducimus necessitatibus eum veniam voluptatibus aperiam
-          quisquam saepe non explicabo reiciendis quaerat vitae ea eius
-          voluptates expedita nesciunt dicta! Ex eligendi est doloremque
-          provident ducimus facere consequuntur animi quod vitae, mollitia ut
-          repellendus sapiente iusto inventore corporis reprehenderit fugit at
-          sunt quas. Quae, corporis. Dicta laborum aut assumenda minima commodi
-          veritatis ipsum expedita impedit dolorem ducimus, necessitatibus
-          quibusdam alias amet cum doloremque iste, aspernatur doloribus nostrum
-          in. Officiis dolor consequuntur molestiae blanditiis ut voluptatem
-          voluptas dignissimos quae consectetur ipsam dolorem illum debitis,
-          deserunt ab praesentium iure eum. Sapiente deserunt natus perferendis
-          beatae pariatur. Saepe sapiente, quo vel harum suscipit aliquam maxime
-          blanditiis omnis? Ratione magnam esse numquam? Eum consequuntur
-          distinctio corrupti architecto laudantium, omnis amet facilis tenetur
-          excepturi quod esse obcaecati asperiores suscipit et consequatur
-          dolor, hic iste sit numquam? Nemo eligendi dicta et laboriosam
-          nesciunt omnis nam voluptate deleniti unde voluptatibus, fugiat minus
-          perspiciatis qui, neque quibusdam sit repudiandae aliquam porro alias
-          error. Animi dignissimos a rerum!
+          <About />
         </div>
       </section>
     </section>
   );
 });
 
-RightSection.displayName = "RightSection";
+ContentSection.displayName = "ContentSection";
+
+function About() {
+  return (
+    <div>
+      <p className="text-muted-foreground">
+        I&apos;m a developer specializing in creating accessible, scalable, and
+        robust software through thoughtfully designed user interfaces and
+        well-tested APIs and backend systems. My passion lies at the
+        intersection of design and functionality, crafting experiences that not
+        only look great but also perform reliably at scale.
+      </p>
+
+      <br />
+
+      <p className="text-muted-foreground">
+        Currently, I am a Full-Stack Engineer at{" "}
+        <a
+          className="text-primary hover:text-blue-300"
+          href="https://www.wysslingconsulting.com/"
+          target="_blank"
+        >
+          Wyssling Consulting
+        </a>
+        , where I focus on automating workflows and maintaining both internal
+        and external APIs. My responsibilities include delivering clean frontend
+        designs, managing state, and building reusable React components—all
+        while writing efficient SQL queries and CRUD operations. I also have
+        experience with authentication, authorization, encryption, and other key
+        security considerations on the web.
+      </p>
+
+      <br />
+
+      <p className="text-muted-foreground">
+        I hold a Computer Science degree from{" "}
+        <a
+          className="text-primary hover:text-blue-300"
+          target="_blank"
+          href="https://www.uvu.edu/cs/"
+        >
+          Utah Valley University
+        </a>
+        , with a background in networking, AI, security, data structures,
+        algorithms, operating systems, and low-level computer architecture. As a
+        student, I was driven by my love for programming, science, and
+        mathematics, and that passion still fuels my drive to build software
+        that can make a meaningful impact.
+      </p>
+
+      <br />
+
+      <p className="text-muted-foreground">
+        In my spare time, I enjoy hiking, camping, discovering new music, and
+        exploring the next must-play game on my PC or PlayStation.
+      </p>
+    </div>
+  );
+}
