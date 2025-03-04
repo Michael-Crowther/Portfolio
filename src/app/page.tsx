@@ -80,7 +80,7 @@ export default function Home() {
         />
       )}
 
-      <div className="flex flex-col xl:flex-row xl:px-0 z-50 ">
+      <div className="flex flex-col xl:flex-row xl:px-0 z-50 min-w-0">
         <span className="w-1/6 hidden xl:block" />
         <ProfileSection />
         <ContentSection ref={contentSectionRef} />
@@ -115,87 +115,87 @@ function ProfileSection() {
         />
       )}
 
-      <div className="flex xl:justify-center mt-10">
+      <div className="flex flex-col items-center sm:items-start xl:items-center xl:justify-center h-full mt-10">
         <Image
           src={imageUrl}
           alt="Profile Image"
           className="rounded-full sm:w-70 sm:h-70 w-60 h-60 object-cover shadow-lg"
         />
-      </div>
-      <p className="text-xl text-muted-foreground mt-10">
-        I build accessible, reliable, and scalable systems for users all around
-        the world.
-      </p>
-      <span className="flex-1" />
-      <section className="flex items-center gap-4 mt-8">
-        <Button
-          size="icon"
-          variant="ghost"
-          className="rounded-full"
-          onClick={() =>
-            window.open("https://github.com/Michael-Crowther", "_blank")
-          }
-        >
-          <Image
-            src={resolvedTheme === "dark" ? githubWhite : githubDark}
-            alt="GitHub"
-            className="h-8 w-8"
-          />
-        </Button>
-        <Button
-          size="icon"
-          variant="ghost"
-          className="rounded-full"
-          onClick={() =>
-            window.open(
-              "https://www.linkedin.com/in/michael-crowther-385a6a239",
-              "_blank"
-            )
-          }
-        >
-          <Image
-            src={resolvedTheme === "dark" ? linkedInWhite : linkedInDark}
-            alt="LinkedIn"
-            //className="h-8 w-8"
-          />
-        </Button>
-        <Button
-          size="icon"
-          variant="ghost"
-          className="rounded-full"
-          onClick={() =>
-            window.open(
-              "https://www.instagram.com/michael_d_crowther/",
-              "_blank"
-            )
-          }
-        >
-          <Image
-            src={resolvedTheme === "dark" ? instagramWhite : instagramDark}
-            alt="Instagram"
-            //className="h-8 w-8"
-          />
-        </Button>
+        <p className="text-xl text-muted-foreground mt-10">
+          I build accessible, reliable, and scalable systems for users all
+          around the world.
+        </p>
+        <span className="flex-1" />
+        <section className="flex items-center gap-4 mt-8">
+          <Button
+            size="icon"
+            variant="ghost"
+            className="rounded-full"
+            onClick={() =>
+              window.open("https://github.com/Michael-Crowther", "_blank")
+            }
+          >
+            <Image
+              src={resolvedTheme === "dark" ? githubWhite : githubDark}
+              alt="GitHub"
+              className="h-8 w-8"
+            />
+          </Button>
+          <Button
+            size="icon"
+            variant="ghost"
+            className="rounded-full"
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/in/michael-crowther-385a6a239",
+                "_blank"
+              )
+            }
+          >
+            <Image
+              src={resolvedTheme === "dark" ? linkedInWhite : linkedInDark}
+              alt="LinkedIn"
+              //className="h-8 w-8"
+            />
+          </Button>
+          <Button
+            size="icon"
+            variant="ghost"
+            className="rounded-full"
+            onClick={() =>
+              window.open(
+                "https://www.instagram.com/michael_d_crowther/",
+                "_blank"
+              )
+            }
+          >
+            <Image
+              src={resolvedTheme === "dark" ? instagramWhite : instagramDark}
+              alt="Instagram"
+              //className="h-8 w-8"
+            />
+          </Button>
 
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                size="icon"
-                variant="ghost"
-                className="rounded-full"
-                onClick={() => {
-                  window.open("/resume.pdf", "_blank");
-                }}
-              >
-                <Download className="size-8" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>Download Resumé</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <ThemeSwitcher />
-      </section>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="rounded-full"
+                  onClick={() => {
+                    window.open("/resume.pdf", "_blank");
+                  }}
+                >
+                  <Download className="size-8" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Download Resumé</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <ThemeSwitcher />
+        </section>
+      </div>
     </section>
   );
 }
@@ -314,7 +314,6 @@ function Experience() {
           "Algorithms",
           "Data Privacy",
           "Databases",
-          "Software Design",
           "Web Programming",
           "Operating Systems",
         ]}
@@ -338,21 +337,18 @@ function ExperienceCard(props: ExperienceCardProps) {
 
   return (
     <a
-      className="flex p-4 hover:bg-card hover:cursor-pointer group rounded-lg"
+      className="flex flex-col 2xl:flex-row sm:p-4 hover:bg-card hover:cursor-pointer group rounded-lg"
       href={href}
       target="_blank"
     >
-      <section className="min-w-[230px]">
+      <section className="min-w-[230px] mb-3">
         <p className="text-muted-foreground text-[12px]">{date}</p>
       </section>
 
       <section className="w-full flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <p className="text-[18px] dark:group-hover:text-teal-300">{title}</p>
-          <ArrowUpRight
-            size={20}
-            className="dark:group-hover:text-teal-300 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1"
-          />
+          <ArrowUpRight className="dark:group-hover:text-teal-300 size-7 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
         </div>
         {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
         <p className="text-muted-foreground">{description}</p>
