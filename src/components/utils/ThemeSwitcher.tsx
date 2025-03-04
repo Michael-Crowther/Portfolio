@@ -39,9 +39,9 @@ export default function ThemeSwitcher() {
             variant="ghost"
           >
             {resolvedTheme === "dark" ? (
-              <Moon className="size-6" />
+              <Moon className="size-7" />
             ) : (
-              <Sun color="black" className="size-6" />
+              <Sun color="black" className="size-7" />
             )}
           </Button>
         </TooltipTrigger>
