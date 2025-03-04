@@ -63,7 +63,7 @@ export default function Home() {
   }
 
   return (
-    <div className=" h-screen w-full flex overflow-x-hidden">
+    <div className="  w-full flex overflow-x-hidden">
       {/* Dynamic background effect that follows the mouse */}
       {resolvedTheme === "dark" && (
         <div
@@ -204,7 +204,7 @@ const ContentSection = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <section
       ref={ref}
-      className=" h-full w-full flex xl:overflow-auto max-h-screen"
+      className=" h-full w-full flex overflow-none xl:overflow-auto xl:max-h-screen"
     >
       <section className="xl:w-5/6 w-full">
         <div className="w-full p-8 sm:p-20">
