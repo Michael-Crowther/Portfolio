@@ -6,6 +6,7 @@ import { ProfileSection } from "./sections/Profile";
 import { About } from "./sections/About";
 import { Experience } from "./sections/Experience";
 import { Projects } from "./sections/Projects";
+import { Demo } from "./sections/Demo";
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
@@ -49,7 +50,7 @@ export default function Home() {
   }
 
   return (
-    <div className="  w-full flex overflow-x-hidden">
+    <div className="w-full flex overflow-x-hidden">
       {/* Dynamic background effect that follows the mouse */}
       {resolvedTheme === "dark" && (
         <div
@@ -75,10 +76,11 @@ export default function Home() {
           className=" h-full w-full flex overflow-none xl:overflow-auto xl:max-h-screen"
         >
           <section className="xl:w-5/6 w-full">
-            <div className="w-full p-8 sm:p-20">
+            <div className="w-full p-8 sm:p-20 sm:pt-0">
               <About />
               <Experience />
               <Projects />
+              <Demo />
             </div>
           </section>
         </section>

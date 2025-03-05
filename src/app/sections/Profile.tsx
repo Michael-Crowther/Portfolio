@@ -16,6 +16,7 @@ import ThemeSwitcher from "@/components/custom/ThemeSwitcher";
 import { Download } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export function ProfileSection() {
   const { resolvedTheme } = useTheme();
@@ -53,7 +54,11 @@ export function ProfileSection() {
           I build accessible, reliable, and scalable systems for users all
           around the world.
         </p>
+
+        <Navigation />
+
         <span className="flex-1" />
+
         <section className="flex items-center gap-2 mt-8">
           <Button
             size="icon"
@@ -125,5 +130,61 @@ export function ProfileSection() {
         </section>
       </div>
     </section>
+  );
+}
+
+function Navigation() {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href") || "";
+    const targetId = href.replace("#", "");
+    const el = document.getElementById(targetId);
+
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const aTag = cn("group flex items-center py-3");
+  const leftSpan = cn(
+    "mr-4 h-px w-8  bg-slate-600 transition-all duration-300 group-hover:w-16  group-hover:bg-slate-200motion-reduce:transition-none"
+  );
+  const rightSpan = cn(
+    "text-md font-bold uppercase tracking-widest  text-slate-500  group-hover:dark:text-slate-200 group-hover:text-slate-600"
+  );
+
+  return (
+    <nav className="flex flex-col w-full mt-10">
+      <ul className="space-y-2">
+        <li>
+          <a href="#about" className={aTag} onClick={handleScroll}>
+            <span className={leftSpan} />
+            <span className={rightSpan}>About</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#experience" className={aTag} onClick={handleScroll}>
+            <span className={leftSpan} />
+            <span className={rightSpan}>Experience</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#projects" className={aTag} onClick={handleScroll}>
+            <span className={leftSpan} />
+            <span className={rightSpan}>Projects</span>
+          </a>
+        </li>
+
+        {/* Demo */}
+        <li>
+          <a href="#demo" className={aTag} onClick={handleScroll}>
+            <span className={leftSpan} />
+            <span className={rightSpan}>Demo</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   );
 }

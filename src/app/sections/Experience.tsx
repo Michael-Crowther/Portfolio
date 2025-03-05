@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function Experience() {
   return (
-    <div className="space-y-15 mb-20">
+    <div className="space-y-15 pt-20" id="experience">
       <ExperienceCard
         date="OCTOBER 2023 - PRESENT"
         title="Full Stack Software Engineer • Wyssling Consulting"

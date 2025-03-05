@@ -7,12 +7,16 @@ import CPUEmulatorImg from "../../../public/cpu-emulator.jpg";
 
 export function Projects() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pt-20" id="projects">
       <ProjectCard
         img={DevSpaceImg}
         alt="Dev-Space"
         title="Dev Space - Discord Clone"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusantium at dolore maiores maxime nesciunt ducimus pariatur? Officia, accusantium inventore?"
+        description=" While still a work in progress, this project gave me foundational experience
+                        with Next.js paradigms—including SSR and both client- and server-side components.
+                        I also gained more familiarity with authentication, error-handling middleware,
+                        and designing SQL tables and migrations. By paying close attention to Discord’s
+                        frontend, I further improved my understanding of UI design and routing."
         tags={[
           "React",
           "Tailwind CSS",
@@ -28,7 +32,7 @@ export function Projects() {
         img={UnityImg}
         alt="Gone"
         title="Gone - Published Unity Project"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusantium at dolore maiores maxime nesciunt ducimus pariatur? Officia, accusantium inventore?"
+        description="Developed in Unity, this was my first large-scale programming project and the spark that fueled my passion for software development. Over three years, I created and published a first-person horror game on Steam—giving dozens of players a chance to experience my custom AI-driven monsters, movement systems, and progression mechanics in a world I designed from scratch. It was both deeply rewarding and an invaluable lesson in writing maintainable, scalable code."
         tags={[
           "Unity",
           "C#",
@@ -44,7 +48,7 @@ export function Projects() {
         img={CPUEmulatorImg}
         alt="CPU Emulator"
         title="CPU Emulator & Assembler"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusantium at dolore maiores maxime nesciunt ducimus pariatur? Officia, accusantium inventore?"
+        description="Serving as the capstone for my Computer Science degree, this project required building a CPU emulator in C++, an assembler in Python, and assembly code for a custom ISA. I also implemented various low-level CPU caches, providing a rigorous deep dive into computer architecture. Although it was the most challenging project I’ve undertaken, it offered me a profound understanding of how computers operate at their lowest level."
         tags={[
           "C++",
           "Python",

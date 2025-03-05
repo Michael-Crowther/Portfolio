@@ -1,6 +1,6 @@
 export function About() {
   return (
-    <div className="mb-20">
+    <div className=" pt-20" id="about">
       <p className="text-muted-foreground">
         I&apos;m a developer specializing in creating accessible, scalable, and
         robust software through thoughtfully designed user interfaces and
