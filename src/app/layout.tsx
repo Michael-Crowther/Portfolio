@@ -14,14 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Michael Crwother's Portfolio",
+  title: "Michael Crowther's Portfolio",
   description:
     "Problem-solver and Full Stack Developer near Salt Lake City, crafting intuitive and high-performance applications.",
   openGraph: {
     title: "Michael Crowther's Portfolio",
     description:
       "Problem-solver and Full Stack Developer near Salt Lake City, crafting intuitive and high-performance applications.",
-    url: "https://michaelcrwother.dev",
+    url: "https://michaelcrowther.dev",
     siteName: "Michael Crowther's Portfolio",
     images: [
       {
