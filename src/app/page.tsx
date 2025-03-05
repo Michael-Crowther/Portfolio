@@ -2,7 +2,6 @@
 import { useEffect, useRef, forwardRef } from "react";
 import Image from "next/image";
 import imageUrl from "../../public/profile.jpg";
-import ThemeSwitcher from "@/components/utils/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import githubWhite from "../../public/github-mark-white.svg";
 import githubDark from "../../public/github-mark.svg";
@@ -20,6 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
+import ThemeSwitcher from "@/components/custom/ThemeSwitcher";
 
 export default function Home() {
   const { resolvedTheme } = useTheme();

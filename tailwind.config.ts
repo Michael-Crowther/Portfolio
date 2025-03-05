@@ -10,20 +10,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          DEFAULT: "#048AC4",
-          50: "#F4FBFF",
-          100: "#D3F1FE",
-          200: "#92DDFD",
-          300: "#51C8FB",
-          400: "#10B3FA",
-          500: "#048AC4",
-          600: "#0375A6",
-          700: "#036088",
-          800: "#024B6A",
-          900: "#02364C",
-          950: "#012B3D",
-        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         bgsecondary: {
