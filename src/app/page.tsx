@@ -129,7 +129,7 @@ function ProfileSection() {
           around the world.
         </p>
         <span className="flex-1" />
-        <section className="flex items-center gap-4 mt-8">
+        <section className="flex items-center gap-2 mt-8">
           <Button
             size="icon"
             variant="ghost"
@@ -141,7 +141,7 @@ function ProfileSection() {
             <Image
               src={resolvedTheme === "dark" ? githubWhite : githubDark}
               alt="GitHub"
-              className="h-8 w-8"
+              className="h-6 w-6"
             />
           </Button>
           <Button
@@ -158,7 +158,7 @@ function ProfileSection() {
             <Image
               src={resolvedTheme === "dark" ? linkedInWhite : linkedInDark}
               alt="LinkedIn"
-              //className="h-8 w-8"
+              className="h-6 w-6"
             />
           </Button>
           <Button
@@ -175,7 +175,7 @@ function ProfileSection() {
             <Image
               src={resolvedTheme === "dark" ? instagramWhite : instagramDark}
               alt="Instagram"
-              //className="h-8 w-8"
+              className="h-6 w-6"
             />
           </Button>
 
@@ -190,7 +190,7 @@ function ProfileSection() {
                     window.open("/resume.pdf", "_blank");
                   }}
                 >
-                  <Download className="size-8" />
+                  <Download className="size-6" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Download Resumé</TooltipContent>
@@ -447,7 +447,7 @@ function ProjectCard(props: ProjectCardProps) {
 
   return (
     <a
-      className="flex flex-col-reverse 2xl:flex-row sm:p-4 hover:bg-card hover:cursor-pointer group rounded-lg gap-5 2xl:gap-10"
+      className="flex flex-col-reverse 2xl:flex-row sm:p-4 hover:bg-card hover:cursor-pointer group rounded-lg gap-5 2xl:gap-10 items-center sm:items-start"
       href={href}
       target="_blank"
     >
@@ -466,7 +466,7 @@ function ProjectCard(props: ProjectCardProps) {
       <section className="w-full flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <p className="text-[18px] dark:group-hover:text-teal-300">{title}</p>
-          <ArrowUpRight className="dark:group-hover:text-teal-300 size-6 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
+          <ArrowUpRight className="dark:group-hover:text-teal-300 size-4 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
         </div>
         <p className="text-muted-foreground">{description}</p>
         <ul className="flex gap-1 mt-2 flex-wrap">
