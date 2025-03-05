@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, forwardRef } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import imageUrl from "../../public/profile.jpg";
 import { Button } from "@/components/ui/button";
 import githubWhite from "../../public/github-mark-white.svg";
@@ -12,6 +12,9 @@ import instagramWhite from "../../public/instagramWhite.svg";
 import { useTheme } from "next-themes";
 import { useState } from "react";
 import { ArrowUpRight, Download } from "lucide-react";
+import DevSpaceImg from "../../public/dev-space.jpg";
+import UnityImg from "../../public/unity-engine-logo.jpg";
+import CPUEmulatorImg from "../../public/cpu-emulator.jpg";
 import {
   Tooltip,
   TooltipContent,
@@ -210,6 +213,7 @@ const ContentSection = forwardRef<HTMLDivElement>((props, ref) => {
         <div className="w-full p-8 sm:p-20">
           <About />
           <Experience />
+          <Projects />
         </div>
       </section>
     </section>
@@ -220,7 +224,7 @@ ContentSection.displayName = "ContentSection";
 
 function About() {
   return (
-    <div className="mb-30">
+    <div className="mb-20">
       <p className="text-muted-foreground">
         I&apos;m a developer specializing in creating accessible, scalable, and
         robust software through thoughtfully designed user interfaces and
@@ -278,11 +282,11 @@ function About() {
 
 function Experience() {
   return (
-    <div className="space-y-15">
+    <div className="space-y-15 mb-20">
       <ExperienceCard
         date="OCTOBER 2023 - PRESENT"
         title="Full Stack Software Engineer • Wyssling Consulting"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, perferendis quaerat culpa labore quam vero voluptate placeat veniam hic debitis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, perferendis quaerat culpa labore quam vero voluptate placeat veniam hic debitis"
+        description="Developed a React, Node, and PostgreSQL CRM platform with a three-person team to manage solar projects for over 300 clients. This new system replaced an $8,000/month RDP server, significantly improving productivity, accuracy, and client satisfaction. I also created a suite of APIs to automate project submissions, drastically reducing turnaround times. Collaboration involved regular code reviews, frequent discussions on scalable design patterns, and organized feature planning. Finally, I set up automated deployments on AWS using GitHub, Elastic Beanstalk, EC2, and CodePipeline."
         tags={[
           "JavaScript",
           "TypeScript",
@@ -303,7 +307,7 @@ function Experience() {
       <ExperienceCard
         date="SEPTEMBER 2018 - MAY 2025"
         title="Computer Science Student • Utah Valley University"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, perferendis quaerat culpa labore quam vero voluptate placeat veniam hic debitis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, perferendis quaerat culpa labore quam vero voluptate placeat veniam hic debitis"
+        description="Studying Computer Science provided me with a strong foundation in both theoretical and practical applications of technology. Over my five years in college, I collaborated with diverse software engineering teams, honing both leadership and technical skills. This rigorous program shaped me into a driven problem solver and sparked my passion for turning real-world ideas into polished, impactful products."
         tags={[
           "C++",
           "Python",
@@ -319,6 +323,14 @@ function Experience() {
         ]}
         href="https://www.uvu.edu/cs/"
       />
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        className="flex 2xl:flex-row sm:p-4 hover:cursor-pointer group rounded-lg gap-2 items-center"
+      >
+        <p className="dark:group-hover:text-teal-300">View full Full Resumé</p>
+        <ArrowUpRight className="dark:group-hover:text-teal-300 size-4 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
+      </a>
     </div>
   );
 }
@@ -348,9 +360,114 @@ function ExperienceCard(props: ExperienceCardProps) {
       <section className="w-full flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <p className="text-[18px] dark:group-hover:text-teal-300">{title}</p>
-          <ArrowUpRight className="dark:group-hover:text-teal-300 size-7 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
+          <ArrowUpRight className="dark:group-hover:text-teal-300 size-6 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
         </div>
         {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
+        <p className="text-muted-foreground">{description}</p>
+        <ul className="flex gap-1 mt-2 flex-wrap">
+          {tags.map((tag: string) => (
+            <Badge
+              key={tag}
+              className="dark:bg-teal-400/10 rounded-full bg-teal-300/40 leading-5 px-3 py-1 dark:text-teal-300 text-black"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </ul>
+      </section>
+    </a>
+  );
+}
+
+function Projects() {
+  return (
+    <div className="space-y-6">
+      <ProjectCard
+        img={DevSpaceImg}
+        alt="Dev-Space"
+        title="Dev Space - Discord Clone"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusantium at dolore maiores maxime nesciunt ducimus pariatur? Officia, accusantium inventore?"
+        tags={[
+          "React",
+          "Tailwind CSS",
+          "Next.js",
+          "SQLite",
+          "Turso",
+          "tRPC",
+          "NextAuth.js",
+        ]}
+        href="https://www.dev--space.com"
+      />
+      <ProjectCard
+        img={UnityImg}
+        alt="Gone"
+        title="Gone - Published Unity Project"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusantium at dolore maiores maxime nesciunt ducimus pariatur? Officia, accusantium inventore?"
+        tags={[
+          "Unity",
+          "C#",
+          "Animation",
+          "AI",
+          "Sound Design",
+          "Player Progression",
+          "Weapon Functionality",
+        ]}
+        href="https://store.steampowered.com/app/1984630/Gone/"
+      />
+      <ProjectCard
+        img={CPUEmulatorImg}
+        alt="CPU Emulator"
+        title="CPU Emulator & Assembler"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores accusantium at dolore maiores maxime nesciunt ducimus pariatur? Officia, accusantium inventore?"
+        tags={[
+          "C++",
+          "Python",
+          "Memory Management",
+          "Assembler",
+          "Assembly",
+          "Cache",
+        ]}
+        href="https://github.com/Michael-Crowther/CPU-Emulator-Assembler"
+      />
+    </div>
+  );
+}
+
+type ProjectCardProps = {
+  img: StaticImageData;
+  alt: string;
+  title: string;
+  description: string;
+  tags: string[];
+  href: string;
+};
+
+function ProjectCard(props: ProjectCardProps) {
+  const { img, title, description, tags, href, alt } = props;
+
+  return (
+    <a
+      className="flex flex-col-reverse 2xl:flex-row sm:p-4 hover:bg-card hover:cursor-pointer group rounded-lg gap-5 2xl:gap-10"
+      href={href}
+      target="_blank"
+    >
+      <div>
+        <Image
+          src={img}
+          alt={alt}
+          loading="lazy"
+          width="300"
+          height="48"
+          decoding="async"
+          className="aspect-video object-cover rounded-lg border-2 border-slate-200/10"
+        />
+      </div>
+
+      <section className="w-full flex flex-col gap-1">
+        <div className="flex items-center gap-2">
+          <p className="text-[18px] dark:group-hover:text-teal-300">{title}</p>
+          <ArrowUpRight className="dark:group-hover:text-teal-300 size-6 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
+        </div>
         <p className="text-muted-foreground">{description}</p>
         <ul className="flex gap-1 mt-2 flex-wrap">
           {tags.map((tag: string) => (
