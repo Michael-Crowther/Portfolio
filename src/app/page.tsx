@@ -76,7 +76,7 @@ export default function Home() {
           className="h-full w-full flex xl:overflow-auto xl:max-h-screen"
         >
           <section className="xl:w-5/6 w-full ">
-            <div className="w-full p-0 sm:pt-0">
+            <div className="w-full p-0 sm:pt-3 xl:pt-0">
               <About />
               <Experience />
               <Projects />

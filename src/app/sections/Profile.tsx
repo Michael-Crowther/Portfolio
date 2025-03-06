@@ -21,7 +21,7 @@ export function ProfileSection() {
   const { resolvedTheme } = useTheme();
 
   return (
-    <section className="relative h-screen w-full p-16 xl:min-w-[460px] xl:max-w-[100px] xl:w-1/3 flex flex-col space-y-10 my-px xl:overflow-hidden">
+    <section className="relative w-full p-16 xl:min-w-[460px] xl:max-w-[100px] xl:w-1/3 flex flex-col space-y-10 my-px xl:overflow-hidden h-svh">
       <div className="flex flex-col items-start">
         <p className="text-[29px] sm:text-[40px] font-bold">Michael Crowther</p>
         <p className="text-[18px] sm:text-[22px]">Full Stack Engineer</p>
@@ -47,9 +47,10 @@ export function ProfileSection() {
         <Image
           src={imageUrl}
           alt="Profile Image"
-          className="rounded-full sm:w-70 sm:h-70 w-60 h-60 object-cover shadow-lg"
+          className="rounded-full sm:w-70 sm:h-70 max-w-60 max-h-60  object-cover shadow-lg"
+          layout="responsive"
         />
-        <p className="text-xl text-muted-foreground mt-10">
+        <p className="text-xl text-muted-foreground mt-10 xl:hidden">
           I build accessible, reliable, and scalable systems for users all
           around the world.
         </p>
@@ -148,13 +149,13 @@ function Navigation() {
 
   return (
     <>
-      <nav className="xl:flex flex-row w-full mt-10 hidden">
-        <ul className="space-y-2">
+      <nav className="xl:flex flex-row w-full mt-8 hidden">
+        <ul className="space-y-1">
           {["about", "experience", "projects", "demo"].map((id) => (
             <li key={id}>
               <a
                 href={`#${id}`}
-                className={"group flex items-center py-3"}
+                className={"group flex items-center py-2"}
                 onClick={handleScroll}
               >
                 <span
@@ -164,7 +165,7 @@ function Navigation() {
                 />
                 <span
                   className={
-                    "text-md font-bold uppercase tracking-widest  text-slate-500  group-hover:dark:text-slate-200 group-hover:text-slate-600"
+                    "text-sm font-bold uppercase tracking-widest  text-slate-500  group-hover:dark:text-slate-200 group-hover:text-slate-600"
                   }
                 >
                   {id.charAt(0).toUpperCase() + id.slice(1)}
