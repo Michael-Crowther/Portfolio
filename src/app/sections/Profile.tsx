@@ -21,7 +21,7 @@ export function ProfileSection() {
   const { resolvedTheme } = useTheme();
 
   return (
-    <section className="relative w-full p-16 xl:min-w-[460px] xl:max-w-[100px] xl:w-1/3 flex flex-col">
+    <section className="relative h-screen w-full p-16 xl:min-w-[460px] xl:max-w-[100px] xl:w-1/3 flex flex-col space-y-10 my-px xl:overflow-hidden">
       <div className="flex flex-col items-start">
         <p className="text-[29px] sm:text-[40px] font-bold">Michael Crowther</p>
         <p className="text-[18px] sm:text-[22px]">Full Stack Engineer</p>
@@ -43,7 +43,7 @@ export function ProfileSection() {
         />
       )}
 
-      <div className="flex flex-col items-center sm:items-start xl:items-center xl:justify-center h-full mt-10">
+      <div className="flex flex-col text-center sm:text-left items-center sm:items-start xl:items-center xl:justify-center">
         <Image
           src={imageUrl}
           alt="Profile Image"
@@ -54,7 +54,9 @@ export function ProfileSection() {
           around the world.
         </p>
 
-        <Navigation />
+        <div className="w-full">
+          <Navigation />
+        </div>
 
         <span className="flex-1" />
 
@@ -146,7 +148,7 @@ function Navigation() {
 
   return (
     <>
-      <nav className="xl:flex flex-col w-full mt-10 hidden">
+      <nav className="xl:flex flex-row w-full mt-10 hidden">
         <ul className="space-y-2">
           {["about", "experience", "projects", "demo"].map((id) => (
             <li key={id}>
