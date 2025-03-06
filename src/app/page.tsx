@@ -67,16 +67,16 @@ export default function Home() {
         />
       )}
 
-      <div className="flex flex-col xl:flex-row xl:px-0 z-50 min-w-0">
+      <div className="flex flex-col xl:flex-row xl:px-0 z-50 min-w-0 h-screen">
         <span className="w-1/6 hidden xl:block" />
         <ProfileSection />
 
         <section
           ref={contentSectionRef}
-          className=" h-full w-full flex overflow-none xl:overflow-auto xl:max-h-screen"
+          className="h-full w-full flex xl:overflow-auto xl:max-h-screen "
         >
-          <section className="xl:w-5/6 w-full">
-            <div className="w-full p-8 sm:p-20 sm:pt-0">
+          <section className="xl:w-5/6 w-full ">
+            <div className="w-full p-8 sm:pt-0">
               <About />
               <Experience />
               <Projects />
