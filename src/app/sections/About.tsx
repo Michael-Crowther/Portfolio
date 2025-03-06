@@ -1,8 +1,8 @@
 export function About() {
   return (
-    <div className="w-full xl:pt-20 pb-10" id="about">
+    <div className="w-full xl:pt-20 " id="about">
       <section
-        className="sticky top-0 backdrop-blur py-8 px-0 sm:px-9 z-50 xl:hidden"
+        className="sticky top-0 backdrop-blur-md py-8 px-6 sm:px-15 z-50 xl:hidden"
         style={{ paddingTop: `calc(env(safe-area-inset-top) + 2rem)` }}
       >
         <h1 className="uppercase font-bold text-lg tracking-widest block ">
@@ -10,7 +10,7 @@ export function About() {
         </h1>
       </section>
 
-      <section className="sm:px-9">
+      <section className="sm:px-15 px-6">
         <p className="text-muted-foreground">
           I&apos;m a developer specializing in creating accessible, scalable,
           and robust software through thoughtfully designed user interfaces and

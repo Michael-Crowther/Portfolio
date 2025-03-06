@@ -3,9 +3,9 @@ import { ArrowUpRight } from "lucide-react";
 
 export function Experience() {
   return (
-    <div className="xl:pt-20 pb-10 w-full" id="experience">
+    <div className="xl:pt-20 pb-10 w-full pt-6" id="experience">
       <section
-        className="sticky top-0 backdrop-blur py-8 px-0 sm:px-9 z-50 xl:hidden"
+        className="sticky top-0 backdrop-blur-md py-8 px-6 sm:px-15 z-50 xl:hidden"
         style={{ paddingTop: `calc(env(safe-area-inset-top) + 2rem)` }}
       >
         <h1 className="uppercase font-bold text-lg tracking-widest block ">
@@ -13,7 +13,7 @@ export function Experience() {
         </h1>
       </section>
 
-      <section className="sm:px-5 space-y-15">
+      <section className="sm:px-11 space-y-15 px-6">
         <ExperienceCard
           date="OCTOBER 2023 - PRESENT"
           title="Full Stack Software Engineer • Wyssling Consulting"

@@ -9,7 +9,7 @@ export function Projects() {
   return (
     <div className="xl:pt-20" id="projects">
       <section
-        className="sticky top-0 backdrop-blur py-8 px-0 sm:px-9 z-50 xl:hidden"
+        className="sticky top-0 backdrop-blur-md py-8 px-6 sm:px-15 z-50 xl:hidden"
         style={{ paddingTop: `calc(env(safe-area-inset-top) + 2rem)` }}
       >
         <h1 className="uppercase font-bold text-lg tracking-widest block ">
@@ -17,7 +17,7 @@ export function Projects() {
         </h1>
       </section>
 
-      <section className="sm:px-5 space-y-6">
+      <section className="sm:px-11 space-y-6 px-6">
         <ProjectCard
           img={DevSpaceImg}
           alt="Dev-Space"
