@@ -9,7 +9,7 @@ export function Projects() {
   return (
     <div className="xl:pt-20" id="projects">
       <section
-        className="sticky top-0 backdrop-blur-md py-8 px-6 sm:px-15 z-50 xl:hidden"
+        className="sticky top-0 backdrop-blur-md py-8 px-6 sm:px-15 z-20 xl:hidden"
         style={{ paddingTop: `calc(env(safe-area-inset-top) + 2rem)` }}
       >
         <h1 className="uppercase font-bold text-lg tracking-widest block ">
