@@ -43,92 +43,95 @@ export function ProfileSection() {
         />
       )}
 
-      <div className="flex flex-col text-center sm:text-left items-center sm:items-start xl:items-center xl:justify-center">
+      <div className="flex justify-center sm:justify-start  xl:justify-center">
         <Image
           src={imageUrl}
           alt="Profile Image"
           className="rounded-full sm:w-70 sm:h-70 max-w-60 max-h-60  object-cover shadow-lg"
           layout="responsive"
         />
+      </div>
+
+      <div className=" h-full flex flex-col text-center sm:text-left items-center sm:items-start xl:items-center xl:justify-center">
         <p className="text-xl text-muted-foreground mt-10 xl:hidden">
           I build accessible, reliable, and scalable systems for users all
           around the world.
         </p>
 
-        <div className="w-full">
+        <section className="flex justify-around flex-col h-full">
+          <span className="flex-1 hidden xl:block max-h-16" />
           <Navigation />
-        </div>
+          <span className="flex-1 hidden xl:block" />
 
-        <span className="flex-1" />
+          <div className="flex items-center gap-2 mt-8">
+            <Button
+              size="icon"
+              variant="ghost"
+              className="rounded-full"
+              onClick={() =>
+                window.open("https://github.com/Michael-Crowther", "_blank")
+              }
+            >
+              <Image
+                src={resolvedTheme === "dark" ? githubWhite : githubDark}
+                alt="GitHub"
+                className="h-6 w-6"
+              />
+            </Button>
+            <Button
+              size="icon"
+              variant="ghost"
+              className="rounded-full"
+              onClick={() =>
+                window.open(
+                  "https://www.linkedin.com/in/michael-crowther-385a6a239",
+                  "_blank"
+                )
+              }
+            >
+              <Image
+                src={resolvedTheme === "dark" ? linkedInWhite : linkedInDark}
+                alt="LinkedIn"
+                className="h-6 w-6"
+              />
+            </Button>
+            <Button
+              size="icon"
+              variant="ghost"
+              className="rounded-full"
+              onClick={() =>
+                window.open(
+                  "https://www.instagram.com/michael_d_crowther/",
+                  "_blank"
+                )
+              }
+            >
+              <Image
+                src={resolvedTheme === "dark" ? instagramWhite : instagramDark}
+                alt="Instagram"
+                className="h-6 w-6"
+              />
+            </Button>
 
-        <section className="flex items-center gap-2 mt-8">
-          <Button
-            size="icon"
-            variant="ghost"
-            className="rounded-full"
-            onClick={() =>
-              window.open("https://github.com/Michael-Crowther", "_blank")
-            }
-          >
-            <Image
-              src={resolvedTheme === "dark" ? githubWhite : githubDark}
-              alt="GitHub"
-              className="h-6 w-6"
-            />
-          </Button>
-          <Button
-            size="icon"
-            variant="ghost"
-            className="rounded-full"
-            onClick={() =>
-              window.open(
-                "https://www.linkedin.com/in/michael-crowther-385a6a239",
-                "_blank"
-              )
-            }
-          >
-            <Image
-              src={resolvedTheme === "dark" ? linkedInWhite : linkedInDark}
-              alt="LinkedIn"
-              className="h-6 w-6"
-            />
-          </Button>
-          <Button
-            size="icon"
-            variant="ghost"
-            className="rounded-full"
-            onClick={() =>
-              window.open(
-                "https://www.instagram.com/michael_d_crowther/",
-                "_blank"
-              )
-            }
-          >
-            <Image
-              src={resolvedTheme === "dark" ? instagramWhite : instagramDark}
-              alt="Instagram"
-              className="h-6 w-6"
-            />
-          </Button>
-
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="rounded-full"
-                  onClick={() => {
-                    window.open("/resume.pdf", "_blank");
-                  }}
-                >
-                  <Download className="size-6" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Download Resumé</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <ThemeSwitcher />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="rounded-full"
+                    onClick={() => {
+                      window.open("/resume.pdf", "_blank");
+                    }}
+                  >
+                    <Download className="size-6" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Download Resumé</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <ThemeSwitcher />
+          </div>
         </section>
       </div>
     </section>
@@ -149,7 +152,7 @@ function Navigation() {
 
   return (
     <>
-      <nav className="xl:flex flex-row w-full mt-8 hidden">
+      <nav className="xl:flex flex-row w-full hidden">
         <ul className="space-y-1">
           {["about", "experience", "projects", "demo"].map((id) => (
             <li key={id}>
@@ -165,7 +168,7 @@ function Navigation() {
                 />
                 <span
                   className={
-                    "text-sm font-bold uppercase tracking-widest  text-slate-500  group-hover:dark:text-slate-200 group-hover:text-slate-600"
+                    "text-md font-bold uppercase tracking-widest  text-slate-500  group-hover:dark:text-slate-200 group-hover:text-slate-600"
                   }
                 >
                   {id.charAt(0).toUpperCase() + id.slice(1)}

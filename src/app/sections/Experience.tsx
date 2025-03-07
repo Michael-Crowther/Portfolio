@@ -30,6 +30,7 @@ export function Experience() {
             "Drizzle",
             "Prisma",
             "Express.js",
+            "Zod",
             "Swagger UI",
           ]}
           href="https://www.wysslingconsulting.com/"
@@ -38,7 +39,7 @@ export function Experience() {
         <ExperienceCard
           date="SEPTEMBER 2018 - MAY 2025"
           title="Computer Science Student • Utah Valley University"
-          description="Studying Computer Science provided me with a strong foundation in both theoretical and practical applications of technology. Over my five years in college, I collaborated with diverse software engineering teams, honing both leadership and technical skills. This rigorous program shaped me into a driven problem solver and sparked my passion for turning real-world ideas into polished, impactful products."
+          description="Studying Computer Science provided me with a strong foundation in both theoretical and practical applications of technology. Throughout my years in college, I collaborated with diverse software engineering teams, honing both leadership and technical skills. This rigorous program shaped me into a driven problem solver and sparked my passion for turning real-world ideas into polished, impactful products."
           tags={[
             "C++",
             "Python",
