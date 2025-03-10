@@ -16,7 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 
 type User = {
@@ -33,7 +33,9 @@ export function Demo() {
   const [limit] = useState(5);
   const [offset, setOffset] = useState(0);
 
-  useEffect(() => {
+  //fetch users
+  const fetchUsers = useCallback(() => {
+    setUsersLoading(true);
     fetch(`/api/users?limit=${limit}&offset=${offset}`, { method: "GET" })
       .then((res) => res.json())
       .then((data) => {
@@ -46,6 +48,10 @@ export function Demo() {
         setUsersLoading(false);
       });
   }, [limit, offset]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   return (
     <div className="min-h-screen xl:pt-10 pb-10 w-full" id="demo">
@@ -68,7 +74,7 @@ export function Demo() {
           Passwords are securely hashed using industry-standard encryption
           before being stored in the database.
         </p>
-        <CreateUserCard />
+        <CreateUserCard afterChanges={fetchUsers} />
       </section>
 
       <section className=" p-6 sm:p-15 flex gap-6 flex-col">
@@ -132,8 +138,15 @@ export function Demo() {
   );
 }
 
-function CreateUserCard() {
+function CreateUserCard({ afterChanges }: { afterChanges: () => void }) {
   const [username, setUsername] = useState("");
+
+  async function createUser() {
+    await fetch(`/api/users?username=${username}&password=1234`, {
+      method: "POST",
+    }).then(afterChanges);
+    console.log("user created");
+  }
 
   return (
     <Card className="w-[350px] bg-teal-400/10 border-teal-400/20 sm:min-w-[500px]">
@@ -144,7 +157,12 @@ function CreateUserCard() {
         </CardDescription>
       </CardHeader>
       <CardContent className="h-full">
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            createUser();
+          }}
+        >
           <div className="grid w-full items-center gap-4 text-primary">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="username">Username</Label>
