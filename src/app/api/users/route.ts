@@ -24,4 +24,6 @@ export async function POST(req: Request) {
   const passwordHash = await getHashedPassword(password);
 
   await db.insert(users).values({ username, passwordHash });
+
+  return new Response("User created");
 }
