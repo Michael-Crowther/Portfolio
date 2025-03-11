@@ -1,6 +1,7 @@
 import { db } from "@/app/db";
 import { users } from "@/app/db/schema";
 import { getHashedPassword } from "@/app/utils/bcrypt";
+import { desc } from "drizzle-orm";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -8,9 +9,15 @@ export async function GET(req: Request) {
   const offset = parseInt(searchParams.get("offset") || "0", 10);
 
   const dbUsers = await db.query.users.findMany({
-    columns: { id: true, username: true, createdAt: true },
+    columns: {
+      id: true,
+      username: true,
+      createdAt: true,
+      profileImageUrl: true,
+    },
     limit,
     offset,
+    orderBy: desc(users.createdAt),
   });
 
   const userCount = await db.$count(users);
@@ -19,9 +26,15 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const { username, password } = new URL(req.url);
+  const { searchParams } = new URL(req.url);
+  const username = searchParams.get("username");
+  const password = searchParams.get("password");
 
-  const passwordHash = await getHashedPassword(password);
+  if (!username) {
+    throw new Error("Username is required");
+  }
+
+  const passwordHash = await getHashedPassword(password!);
 
   await db.insert(users).values({ username, passwordHash });
 

@@ -1,8 +1,8 @@
 export function PrettyObject({ children }: { children: unknown }) {
   return (
-    <div className="flex leading-tight flex-col gap-2 whitespace-pre-wrap p-2 h-[800px] text-primary text-[11px]">
+    <div className="flex leading-tight flex-col gap-2  p-2 text-primary text-sm overflow-hidden">
       {/* <p className="border-b text-center">Object</p> */}
-      {JSON.stringify(children, null, "\t")}
+      <pre>{JSON.stringify(children, null, "\t")}</pre>
     </div>
   );
 }

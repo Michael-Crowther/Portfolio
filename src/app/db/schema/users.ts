@@ -6,6 +6,9 @@ const users = sqliteTable("users", {
     .primaryKey()
     .$default(() => createId()),
   username: text("username").notNull(),
+  profileImageUrl: text("profile_image_url")
+    .default("https://github.com/shadcn.png")
+    .notNull(),
   passwordHash: text("password_hash").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()

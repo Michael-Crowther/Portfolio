@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `profile_image_url` text DEFAULT 'https://github.com/shadcn.png' NOT NULL;

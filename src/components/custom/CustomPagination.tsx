@@ -44,7 +44,7 @@ export function CustomPagination(props: MyPaginationProps) {
           variant="default"
           size="icon"
           onClick={handlePreviousPage}
-          className="hover:bg-teal-500 bg-teal-500/60 hover:cursor-pointer"
+          className="dark:bg-teal-100/90 shadow-sm cursor-pointer hover:bg-teal-500/40 bg-teal-500/50 text-primary dark:hover:bg-teal-100/80 dark:text-secondary"
         >
           <ChevronLeft />
         </Button>
@@ -55,7 +55,7 @@ export function CustomPagination(props: MyPaginationProps) {
         <Button
           disabled={isLastPage}
           variant="default"
-          className="hover:bg-teal-500 bg-teal-500/60 hover:cursor-pointer"
+          className="dark:bg-teal-100/90 shadow-sm cursor-pointer hover:bg-teal-500/40 bg-teal-500/50 text-primary dark:hover:bg-teal-100/80 dark:text-secondary"
           size="icon"
           onClick={handleNextPage}
         >
