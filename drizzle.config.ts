@@ -5,9 +5,9 @@ export default defineConfig({
   schema: "./src/app/db/schema/index.ts",
   out: "./src/app/db/migrations",
   dialect: "turso",
-  //driver: "",
+  //driver: "turso",
   dbCredentials: {
-    url: env.TURSO_DATABASE_URL,
-    authToken: env.TURSO_AUTH_TOKEN,
+    url: env.TURSO_DATABASE_URL!,
+    authToken: env.TURSO_AUTH_TOKEN!,
   },
 });

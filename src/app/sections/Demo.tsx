@@ -8,43 +8,75 @@ import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { NoResults } from "@/components/custom/NoResults";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
-type User = {
-  id: string;
-  username: string;
-  createdAt: Date;
-  profileImageUrl: string;
+type UserData = {
+  users: {
+    id: string;
+    username: string;
+    createdAt: Date;
+    profileImageUrl: string;
+  }[];
+  userCount: number;
 };
 
 export function Demo() {
-  const [users, setUsers] = useState<User[]>();
-  const [userCount, setUserCount] = useState(0);
-  const [usersLoading, setUsersLoading] = useState(true);
   const [viewJson, setViewJson] = useState(false);
   const [limit] = useState(5);
   const [offset, setOffset] = useState(0);
-  // const [hideCreate, setHideCreate] = useState(false);
+  const queryClient = useQueryClient();
 
-  //fetch users
-  const fetchUsers = useCallback(() => {
-    setUsersLoading(true);
-    fetch(`/api/users?limit=${limit}&offset=${offset}`, { method: "GET" })
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data.users);
-        setUserCount(data.userCount);
-        setUsersLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching users:", error);
-        setUsersLoading(false);
-      });
-  }, [limit, offset]);
+  async function fetchUsers() {
+    const response = await fetch(
+      `http://10.0.201:3001/api/users?limit=${limit}&offset=${offset}`,
+      {
+        method: "GET",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  }
 
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+  async function removeUser(userId: string) {
+    const response = await fetch(
+      `http://10.0.201:3001/api/users?userId=${userId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  }
+
+  const { data: userData, isLoading } = useQuery<UserData>({
+    queryKey: ["users", offset],
+    queryFn: fetchUsers,
+  });
+
+  const { mutate: deleteUser } = useMutation({
+    mutationKey: ["users"],
+    mutationFn: removeUser,
+    onSuccess: () => {
+      console.log("successfully deleted!");
+      queryClient.invalidateQueries({ queryKey: ["users", offset] });
+    },
+  });
 
   return (
     <div className="min-h-screen xl:pt-10 pb-10 w-full" id="demo">
@@ -64,7 +96,8 @@ export function Demo() {
           on posts. This backend is hosted on Vercel, with APIs configured with
           Node Express.
         </p>
-        <Card className=" bg-teal-400/10 border-teal-400/20 shadow">
+
+        <Card className="bg-teal-400/10 border-teal-400/20 shadow">
           <CardContent className="flex flex-col gap-4 h-full">
             <Tabs defaultValue="friends" className="w-full">
               <div className="flex items-center gap-8">
@@ -84,19 +117,28 @@ export function Demo() {
               <TabsContent
                 value="friends"
                 className={cn(
-                  "overflow-y-hidden min-h-[310px]",
-                  usersLoading && "items-center flex justify-center",
+                  "overflow-y-hidden min-h-[270px]",
+                  (isLoading || !userData || userData.userCount === 0) &&
+                    "items-center flex justify-center",
                   viewJson && "min-h-[580px]"
                 )}
               >
-                {usersLoading ? (
+                {isLoading ? (
                   <LoadingSpinner />
+                ) : !userData || userData.userCount === 0 ? (
+                  <div className="flex items-center justify-center h-full">
+                    <NoResults title="No Users" />
+                  </div>
                 ) : viewJson ? (
-                  <PrettyObject>{users}</PrettyObject>
+                  <PrettyObject>{userData}</PrettyObject>
                 ) : (
                   <div className="flex h-full gap-2">
-                    {users?.map((user) => (
-                      <UserCard user={user} key={user.id} />
+                    {userData?.users.map((user) => (
+                      <UserCard
+                        user={user}
+                        key={user.id}
+                        onDelete={(userId: string) => deleteUser(userId)}
+                      />
                     ))}
                   </div>
                 )}
@@ -109,7 +151,7 @@ export function Demo() {
               limit={limit}
               label="Users"
               offset={offset}
-              count={userCount || 0}
+              count={userData?.userCount || 0}
               setOffset={setOffset}
             />
           </CardFooter>
@@ -120,32 +162,69 @@ export function Demo() {
 }
 
 type UserCardProps = {
-  user: User;
+  user: {
+    id: string;
+    username: string;
+    createdAt: Date;
+    profileImageUrl: string;
+  };
+  onDelete: (userId: string) => void;
 };
 
-function UserCard({ user }: UserCardProps) {
+function UserCard({ user, onDelete }: UserCardProps) {
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+
   return (
-    <Card className="dark:bg-slate-400/80 bg-inherit shadow">
-      <CardContent className="font-bold">
-        <Image
-          src={user.profileImageUrl}
-          alt="Avatar"
-          width={300}
-          height={300}
-          className=" h-32"
-        />
-        <div className="pt-2 items-center gap-2 flex flex-col">
-          <p>{user.username}</p>
+    <>
+      <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+        <AlertDialogContent className="dark:bg-gray-900">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Remove Friend?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to remove this user as a friend?
+            </AlertDialogDescription>
+            <AlertDialogFooter>
+              <AlertDialogCancel className="hover:cursor-pointer">
+                Cancel
+              </AlertDialogCancel>
+              <AlertDialogAction
+                onClick={async () => {
+                  setShowConfirmDialog(false);
+                  onDelete(user.id);
+                }}
+                className="hover:cursor-pointer"
+              >
+                Confirm
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogHeader>
+        </AlertDialogContent>
+      </AlertDialog>
+      <Card className="dark:bg-slate-400/80 bg-inherit shadow border py-0 rounded-md gap-2">
+        <div className=" dark:bg-slate-300/50 bg-teal-300/30 px-3 rounded-md rounded-b-none p-2 pb-0">
+          <Image
+            src={user.profileImageUrl}
+            alt="Avatar"
+            width={300}
+            height={300}
+            className=" h-26"
+          />
+        </div>
+        <div className="p-4 pt-0 items-center gap-2 flex flex-col">
+          <p className="font-semibold">{user.username}</p>
           <div className="w-full pt-2 gap-2 flex flex-col">
             <Button className="dark:bg-teal-100/90 shadow-sm cursor-pointer hover:bg-teal-500/40 bg-teal-500/50 text-primary dark:hover:bg-teal-100/80 dark:text-secondary w-full">
               Message
             </Button>
-            <Button className="bg-red-500/60 shadow dark:bg-red-400/90 dark:hover:bg-red-400/80 cursor-pointer text-primary hover:bg-red-500/50 dark:text-secondary">
+            <Button
+              onClick={() => setShowConfirmDialog(!showConfirmDialog)}
+              className="bg-red-500/60 shadow dark:bg-red-400/90 dark:hover:bg-red-400/80 cursor-pointer text-primary hover:bg-red-500/50 dark:text-secondary"
+            >
               Remove Friend
             </Button>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </Card>
+    </>
   );
 }

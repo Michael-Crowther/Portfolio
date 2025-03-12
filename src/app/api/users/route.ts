@@ -1,7 +1,7 @@
 import { db } from "@/app/db";
 import { users } from "@/app/db/schema";
 import { getHashedPassword } from "@/app/utils/bcrypt";
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -39,4 +39,27 @@ export async function POST(req: Request) {
   await db.insert(users).values({ username, passwordHash });
 
   return new Response("User created");
+}
+
+export async function DELETE(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const userId = searchParams.get("userId");
+
+  if (!userId) {
+    throw new Error("User ID is required");
+  }
+
+  const [dbUser] = await db
+    .delete(users)
+    .where(eq(users.id, userId))
+    .returning({ username: users.username });
+
+  if (!dbUser) {
+    throw new Error("User does not exist");
+  }
+
+  return new Response(
+    JSON.stringify({ message: `User ${dbUser.username} has been deleted` }),
+    { status: 200, headers: { "Content-Type": "application/json" } }
+  );
 }

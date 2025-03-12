@@ -26,6 +26,11 @@ async function seed() {
   for (const user of fakeUsers) {
     const avatarSvg = createAvatar(avataaars, {
       seed: user.username,
+      accessories: [],
+      eyes: ["default", "happy", "closed"],
+      eyebrows: ["default", "defaultNatural"],
+      mouth: ["default", "twinkle", "smile"],
+      facialHair: ["beardLight", "moustacheFancy"],
     });
 
     // Convert to raw SVG string
