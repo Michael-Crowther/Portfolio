@@ -79,7 +79,7 @@ export function Demo() {
     queryFn: fetchUsers,
   });
 
-  const { mutate: deleteUser } = useMutation({
+  const { mutate: deleteUser, isPending } = useMutation({
     mutationKey: ["users"],
     mutationFn: removeUser,
     onSuccess: (data) => {
@@ -141,7 +141,7 @@ export function Demo() {
                         viewJson && "min-h-[580px]"
                       )}
                     >
-                      {isLoading ? (
+                      {isLoading || isPending ? (
                         <LoadingSpinner />
                       ) : !userData || userData.userCount === 0 ? (
                         <div className="flex items-center justify-center h-full">
