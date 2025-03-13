@@ -1,12 +1,13 @@
 import { db } from "@/app/db";
 import { users } from "@/app/db/schema";
 import { getHashedPassword } from "@/app/utils/bcrypt";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, like } from "drizzle-orm";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const limit = parseInt(searchParams.get("limit") || "20", 10);
   const offset = parseInt(searchParams.get("offset") || "0", 10);
+  const search = searchParams.get("search");
 
   const dbUsers = await db.query.users.findMany({
     columns: {
@@ -15,12 +16,23 @@ export async function GET(req: Request) {
       createdAt: true,
       profileImageUrl: true,
     },
+    where: !!search ? like(users.username, `%${search}%`) : undefined,
     limit,
     offset,
     orderBy: desc(users.createdAt),
   });
 
   const userCount = await db.$count(users);
+
+  if (!!search) {
+    const searchUserCount = await db.$count(
+      users,
+      like(users.username, `%${search}%`)
+    );
+    return new Response(
+      JSON.stringify({ users: dbUsers, userCount: searchUserCount })
+    );
+  }
 
   return new Response(JSON.stringify({ users: dbUsers, userCount }));
 }

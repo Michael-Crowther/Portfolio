@@ -9,22 +9,8 @@ import { Projects } from "./sections/Projects";
 import { Demo } from "./sections/Demo";
 
 export default function Home() {
-  const { resolvedTheme } = useTheme();
   const contentSectionRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   // Listen for wheel events on the window
   useEffect(() => {
@@ -52,20 +38,7 @@ export default function Home() {
   return (
     <div className="w-full flex xl:overflow-hidden overflow-x-hidden xl:min-h-screen">
       {/* Dynamic background effect that follows the mouse */}
-      {resolvedTheme === "dark" && (
-        <div
-          style={{
-            left: mousePos.x,
-            top: mousePos.y,
-            width: "1000px",
-            height: "1000px",
-            background:
-              "radial-gradient(circle, rgba(0, 0, 128, 0.3) 0%, rgba(0, 0, 128, 0) 60%)",
-            transform: "translate(-50%, -50%)",
-          }}
-          className="absolute pointer-events-none hidden sm:block"
-        />
-      )}
+      <HoverEffect />
 
       <div className="flex flex-col xl:flex-row xl:px-0 z-50 min-w-0 h-screen">
         <span className="w-1/6 hidden xl:block" />
@@ -86,5 +59,39 @@ export default function Home() {
         </section>
       </div>
     </div>
+  );
+}
+
+function HoverEffect() {
+  const { resolvedTheme } = useTheme();
+  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return (
+    resolvedTheme === "dark" && (
+      <div
+        style={{
+          left: mousePos.x,
+          top: mousePos.y,
+          width: "1000px",
+          height: "1000px",
+          background:
+            "radial-gradient(circle, rgba(0, 0, 128, 0.3) 0%, rgba(0, 0, 128, 0) 60%)",
+          transform: "translate(-50%, -50%)",
+        }}
+        className="absolute pointer-events-none hidden sm:block"
+      />
+    )
   );
 }

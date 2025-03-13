@@ -1,10 +1,10 @@
 import env from "@/env";
 import { users } from "./schema";
-import { generateFakeUsername } from "@/lib/helpers";
 import { db } from ".";
 import { getHashedPassword } from "../utils/bcrypt";
 import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
+import { faker } from "@faker-js/faker";
 
 if (!env.DB_SEEDING) {
   throw new Error('You must set DB_SEEDING to "true" when running seeds');
@@ -19,7 +19,9 @@ async function seed() {
 
   // Generate an array of fake user objects
   const fakeUsers = Array.from({ length: 20 }, () => ({
-    username: generateFakeUsername(),
+    username: `${faker.person.firstName().slice(0, 6)} ${faker.person
+      .lastName()
+      .slice(0, 6)}`,
   }));
 
   //create fake users

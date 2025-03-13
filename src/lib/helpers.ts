@@ -49,8 +49,3 @@ export function arraysHaveSameElements(
   }
   return true;
 }
-
-export function generateFakeUsername() {
-  const randomNum = Math.floor(Math.random() * 100000);
-  return `fake_user_${randomNum}`;
-}
