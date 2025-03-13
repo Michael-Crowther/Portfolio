@@ -7,7 +7,7 @@ import CPUEmulatorImg from "../../../public/cpu-emulator.jpg";
 
 export function Projects() {
   return (
-    <div className="xl:pt-20" id="projects">
+    <main className="xl:pt-20" id="projects">
       <section
         className="sticky top-0 backdrop-blur-md py-8 px-6 sm:px-15 z-20 xl:hidden"
         style={{ paddingTop: `calc(env(safe-area-inset-top) + 2rem)` }}
@@ -70,7 +70,7 @@ export function Projects() {
           href="https://github.com/Michael-Crowther/CPU-Emulator-Assembler"
         />
       </section>
-    </div>
+    </main>
   );
 }
 

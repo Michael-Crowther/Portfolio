@@ -1,6 +1,6 @@
 export function About() {
   return (
-    <div className="w-full xl:pt-20" id="about">
+    <main className="w-full xl:pt-20" id="about">
       <section
         className="sticky top-0 backdrop-blur-md py-8 px-6 sm:px-15 z-20 xl:hidden"
         style={{ paddingTop: `calc(env(safe-area-inset-top) + 2rem)` }}
@@ -63,6 +63,6 @@ export function About() {
           exploring the next must-play game on my PC or PlayStation.
         </p>
       </section>
-    </div>
+    </main>
   );
 }

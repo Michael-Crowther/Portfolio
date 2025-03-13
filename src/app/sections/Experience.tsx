@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function Experience() {
   return (
-    <div className="xl:pt-20 pb-10 w-full pt-6" id="experience">
+    <main className="xl:pt-20 pb-10 w-full pt-6" id="experience">
       <section
         className="sticky top-0 backdrop-blur-md py-8 px-6 sm:px-15 z-20 xl:hidden"
         style={{ paddingTop: `calc(env(safe-area-inset-top) + 2rem)` }}
@@ -66,7 +66,7 @@ export function Experience() {
           <ArrowUpRight className="dark:group-hover:text-teal-300 size-4 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
         </a>
       </section>
-    </div>
+    </main>
   );
 }
 
