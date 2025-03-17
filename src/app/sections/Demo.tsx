@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -114,10 +113,19 @@ export function Demo() {
 
       <section className=" p-6 sm:p-15 flex gap-6 flex-col">
         <p className="text-primary/70">
-          This is a basic social media demo to demonstrate my full stack
-          abilities. You can view users and posts. Feel free to leave comments
-          on posts. This backend is hosted on Vercel, with APIs configured with
-          Node Express.
+          This project showcases my full-stack development skills through a user
+          management interface. Randomly generated users are seeded into a
+          SQLite database hosted on{" "}
+          <a
+            href="https://turso.tech/"
+            className="font-semibold text-secondary hover:text-blue-400"
+          >
+            Turso
+          </a>{" "}
+          and displayed with pagination and a debounced search input. Data
+          fetching and updates are handled efficiently with TanStack Query,
+          while the backend routes utilize the Next.js request/response
+          paradigm.
         </p>
 
         <Card
@@ -129,73 +137,60 @@ export function Demo() {
           {!selectedUser ? (
             <>
               <CardContent className="flex flex-col gap-4 h-full">
-                {
-                  <Tabs defaultValue="friends" className="w-full">
-                    <div className="flex items-center gap-8">
-                      <TabsList className="mb-5">
-                        <TabsTrigger value="friends">Friends</TabsTrigger>
-                        <TabsTrigger value="posts">Posts</TabsTrigger>
-                      </TabsList>
-                      <div className="flex items-center space-x-2 pb-4 text-primary">
-                        <Switch
-                          id="json"
-                          checked={viewJson}
-                          onCheckedChange={setViewJson}
-                        />
-                        <Label htmlFor="json">View JSON</Label>
+                <section
+                  className={cn(
+                    "overflow-hidden min-h-[330px] space-y-4 p-2 flex flex-col"
+                  )}
+                >
+                  <div className="flex items-center space-x-2 pb-4 text-primary">
+                    <Input
+                      type="search"
+                      placeholder="Search Users..."
+                      onChange={(e) => setSearch(e.target.value)}
+                      className="w-[250px] border-primary text-primary"
+                    />
+                    <span className="flex-1" />
+                    <Switch
+                      id="json"
+                      checked={viewJson}
+                      onCheckedChange={setViewJson}
+                    />
+                    <Label htmlFor="json">View JSON</Label>
+                  </div>
+                  <div
+                    className={cn(
+                      "flex items-center flex-1",
+                      (isLoading || userData?.userCount === 0) &&
+                        "justify-center"
+                    )}
+                  >
+                    {isLoading ? (
+                      <LoadingSpinner />
+                    ) : !userData || userData.userCount === 0 ? (
+                      <div className="flex items-center justify-center h-full">
+                        <NoResults title="No Users" />
                       </div>
-                    </div>
-                    <TabsContent
-                      value="friends"
-                      className={cn(
-                        "overflow-hidden min-h-[330px] space-y-4 p-2 flex flex-col"
-                      )}
-                    >
-                      <Input
-                        type="search"
-                        placeholder="Search Friends..."
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="w-[250px] border-primary text-primary"
-                      />
-                      <div
-                        className={cn(
-                          "flex items-center flex-1",
-                          (isLoading || userData?.userCount === 0) &&
-                            "justify-center"
-                        )}
-                      >
-                        {isLoading ? (
-                          <LoadingSpinner />
-                        ) : !userData || userData.userCount === 0 ? (
-                          <div className="flex items-center justify-center h-full">
-                            <NoResults title="No Friends" />
-                          </div>
-                        ) : viewJson ? (
-                          <PrettyObject>{userData}</PrettyObject>
-                        ) : (
-                          <div className="flex gap-1 overflow-auto">
-                            {userData?.users.map((user) => (
-                              <UserCard
-                                user={user}
-                                key={user.id}
-                                onDelete={(userId: string) =>
-                                  deleteUser(userId)
-                                }
-                                setSelectedUser={setSelectedUser}
-                              />
-                            ))}
-                          </div>
-                        )}
+                    ) : viewJson ? (
+                      <PrettyObject>{userData}</PrettyObject>
+                    ) : (
+                      <div className="flex gap-1 overflow-auto">
+                        {userData?.users.map((user) => (
+                          <UserCard
+                            user={user}
+                            key={user.id}
+                            onDelete={(userId: string) => deleteUser(userId)}
+                            setSelectedUser={setSelectedUser}
+                          />
+                        ))}
                       </div>
-                    </TabsContent>
-                    <TabsContent value="posts">Posts data here</TabsContent>
-                  </Tabs>
-                }
+                    )}
+                  </div>
+                </section>
               </CardContent>
               <CardFooter>
                 <CustomPagination
                   limit={limit}
-                  label="Friends"
+                  label="Users"
                   offset={offset}
                   count={userData?.userCount || 0}
                   setOffset={setOffset}
@@ -233,9 +228,9 @@ function UserCard({ user, onDelete, setSelectedUser }: UserCardProps) {
       <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
         <AlertDialogContent className="dark:bg-gray-900 border border-white/30">
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove Friend?</AlertDialogTitle>
+            <AlertDialogTitle>Remove User?</AlertDialogTitle>
             <AlertDialogDescription>
-              {`Are you sure you want to remove '${user.username}' as a friend?`}
+              {`Are you sure you want to remove user '${user.username}'?`}
             </AlertDialogDescription>
             <AlertDialogFooter>
               <AlertDialogCancel className="hover:cursor-pointer">
@@ -277,7 +272,7 @@ function UserCard({ user, onDelete, setSelectedUser }: UserCardProps) {
               onClick={() => setShowConfirmDialog(!showConfirmDialog)}
               className="bg-red-500/60 shadow dark:bg-red-400/90 dark:hover:bg-red-400/80 cursor-pointer text-primary hover:bg-red-500/50 dark:text-secondary"
             >
-              Remove Friend
+              Remove User
             </Button>
           </div>
         </div>
@@ -371,7 +366,7 @@ function MessageInterface({
             className=" h-56"
           />
         </div>
-        <div className="p-4 pt-0 items-center gap-2 flex flex-col">
+        <div className="p-4 pt-3 items-center gap-2 flex flex-col">
           <p className="font-semibold text-xl">{selectedUser?.username}</p>
           <p>Registered since Mar 13, 2025</p>
         </div>
