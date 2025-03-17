@@ -1,9 +1,3 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import imageUrl from "../../../public/profile.jpg";
 import { Button } from "@/components/ui/button";
 import githubWhite from "../../../public/github-mark-white.svg";
@@ -13,7 +7,6 @@ import linkedInWhite from "../../../public/whiteLinkedIn.svg";
 import instagramDark from "../../../public/instagramDark.svg";
 import instagramWhite from "../../../public/instagramWhite.svg";
 import ThemeSwitcher from "@/components/custom/ThemeSwitcher";
-import { Download } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 
@@ -58,7 +51,7 @@ export function ProfileSection() {
           around the world.
         </p>
 
-        <section className="flex justify-around flex-col h-full">
+        <section className="flex justify-around flex-col h-full min-w-50 items-center">
           <span className="flex-1 hidden xl:block max-h-16" />
           <Navigation />
           <span className="flex-1 hidden xl:block" />
@@ -113,7 +106,7 @@ export function ProfileSection() {
               />
             </Button>
 
-            <TooltipProvider>
+            {/* <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
@@ -129,7 +122,7 @@ export function ProfileSection() {
                 </TooltipTrigger>
                 <TooltipContent>Download Resumé</TooltipContent>
               </Tooltip>
-            </TooltipProvider>
+            </TooltipProvider> */}
             <ThemeSwitcher />
           </div>
         </section>

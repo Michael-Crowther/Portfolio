@@ -55,7 +55,7 @@ export function Experience() {
           ]}
           href="https://www.uvu.edu/cs/"
         />
-        <a
+        {/* <a
           href="/resume.pdf"
           target="_blank"
           className="flex 2xl:flex-row sm:p-4 hover:cursor-pointer group rounded-lg gap-2 items-center"
@@ -64,7 +64,7 @@ export function Experience() {
             View full Full Resumé
           </p>
           <ArrowUpRight className="dark:group-hover:text-teal-300 size-4 transition-transform duration-200 ease-out group-hover:-translate-y-1 group-hover:translate-x-1" />
-        </a>
+        </a> */}
       </section>
     </main>
   );

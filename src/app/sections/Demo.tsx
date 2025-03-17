@@ -118,7 +118,8 @@ export function Demo() {
           SQLite database hosted on{" "}
           <a
             href="https://turso.tech/"
-            className="font-semibold text-secondary hover:text-blue-400"
+            className="text-primary hover:text-blue-400"
+            target="_blank"
           >
             Turso
           </a>{" "}
