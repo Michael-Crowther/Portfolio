@@ -24,6 +24,7 @@ import { toast } from "sonner";
 import { ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useDebounceValue } from "usehooks-ts";
+import { CreateUser } from "@/components/forms/CreateUser";
 
 type User = {
   id: string;
@@ -39,6 +40,7 @@ type UserData = {
 
 export function Demo() {
   const [viewJson, setViewJson] = useState(false);
+  const [createUser, setCreateUser] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | undefined>();
   const [search, setSearch] = useDebounceValue("", 500);
   const [limit] = useState(5);
@@ -132,10 +134,12 @@ export function Demo() {
         <Card
           className={cn(
             "bg-teal-400/10 border-teal-400/20 shadow",
-            selectedUser && "py-0"
+            (selectedUser || createUser) && "py-0"
           )}
         >
-          {!selectedUser ? (
+          {createUser ? (
+            <CreateUser onBack={() => setCreateUser(false)} />
+          ) : !selectedUser ? (
             <>
               <CardContent className="flex flex-col gap-4 h-full">
                 <section
@@ -150,6 +154,10 @@ export function Demo() {
                       onChange={(e) => setSearch(e.target.value)}
                       className="w-[250px] border-primary text-primary"
                     />
+                    <Button onClick={() => setCreateUser(true)}>
+                      Create User
+                    </Button>
+
                     <span className="flex-1" />
                     <Switch
                       id="json"
@@ -302,7 +310,7 @@ function MessageInterface({
   }
 
   return (
-    <main className="flex gap-2 p-2">
+    <main className="flex gap-2 p-2 ">
       <div className="min-h-96 p-5 pt-0 flex flex-col border border-primary/50 rounded-lg w-full lg:w-full md:w-2/3 2xl:w-2/3 shadow">
         <header className="flex items-center w-full pt-4">
           <Button
@@ -315,7 +323,7 @@ function MessageInterface({
           </Button>
         </header>
 
-        <div className=" h-90 flex flex-col items-end gap-2 overflow-auto overflow-x-hidden">
+        <div className=" h-90 flex flex-col items-end gap-2 overflow-auto overflow-x-hidden ">
           {messages.length > 0 ? (
             messages.map((message: string, index: number) => (
               <div
