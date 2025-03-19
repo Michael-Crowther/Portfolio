@@ -133,32 +133,34 @@ export function CreateUser({ onBack, afterChanges }: CreateUserProps) {
             Back
           </Button>
           <span className="flex-1" />
-          <Button
-            className="cursor-pointer text-primary mb-4"
-            onClick={clearSelections}
-            variant="ghost"
-            disabled={!canSubmit}
-          >
-            Clear All
-          </Button>
-          <Button
-            className="dark:bg-teal-100/90 mb-4 shadow-sm cursor-pointer hover:bg-teal-500/40 bg-teal-500/50 text-primary dark:hover:bg-teal-100/80 dark:text-secondary justify-between"
-            disabled={!canSubmit}
-            onClick={() =>
-              createAvatar({
-                eyebrows,
-                eyes,
-                clothing,
-                clothesColor,
-                hatColor,
-                top,
-                skinColor,
-                mouth,
-              })
-            }
-          >
-            Submit
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              className="cursor-pointer text-primary mb-4"
+              onClick={clearSelections}
+              variant="ghost"
+              disabled={!canSubmit}
+            >
+              Clear All
+            </Button>
+            <Button
+              className="dark:bg-teal-100/90 mb-4 shadow-sm cursor-pointer hover:bg-teal-500/40 bg-teal-500/50 text-primary dark:hover:bg-teal-100/80 dark:text-secondary justify-between"
+              disabled={!canSubmit}
+              onClick={() =>
+                createAvatar({
+                  eyebrows,
+                  eyes,
+                  clothing,
+                  clothesColor,
+                  hatColor,
+                  top,
+                  skinColor,
+                  mouth,
+                })
+              }
+            >
+              Submit
+            </Button>
+          </div>
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 justify-center items-center h-full gap-4">
