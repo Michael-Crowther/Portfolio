@@ -5,6 +5,7 @@ import { getHashedPassword } from "../utils/bcrypt";
 import { createAvatar } from "@dicebear/core";
 import { avataaars } from "@dicebear/collection";
 import { faker } from "@faker-js/faker";
+import { randomDate } from "@/lib/helpers";
 
 if (!env.DB_SEEDING) {
   throw new Error('You must set DB_SEEDING to "true" when running seeds');
@@ -43,7 +44,12 @@ async function seed() {
       svgString
     ).toString("base64")}`;
 
-    dbFakeUsers.push({ ...user, passwordHash, profileImageUrl: dataUri });
+    dbFakeUsers.push({
+      ...user,
+      passwordHash,
+      profileImageUrl: dataUri,
+      createdAt: randomDate(7),
+    });
   }
 
   await db.insert(users).values(dbFakeUsers).returning({ id: users.id });

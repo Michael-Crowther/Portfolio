@@ -22,11 +22,30 @@ import {
 type ComboboxProps = {
   options: string[];
   label: string;
+  onSelect: (value: string) => void;
+  value?: string;
 };
 
-export function Combobox({ options, label }: ComboboxProps) {
+export function Combobox({
+  options,
+  label,
+  onSelect,
+  value: controlledValue,
+}: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [internalValue, setInternalValue] = React.useState("");
+
+  // Use the controlled value if provided; otherwise, use the internal value.
+  const value = controlledValue !== undefined ? controlledValue : internalValue;
+
+  const handleSelect = (option: string) => {
+    // Update the internal state only if it's not controlled.
+    if (controlledValue === undefined) {
+      setInternalValue(option === value ? "" : option);
+    }
+    onSelect(option);
+    setOpen(false);
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -51,10 +70,7 @@ export function Combobox({ options, label }: ComboboxProps) {
                 <CommandItem
                   key={option}
                   value={option}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
-                    setOpen(false);
-                  }}
+                  onSelect={(currentValue) => handleSelect(currentValue)}
                 >
                   {option}
                   <Check

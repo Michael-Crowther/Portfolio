@@ -1,10 +1,10 @@
 import { schema } from "@dicebear/core";
-import { micah } from "@dicebear/collection";
+import { avataaars } from "@dicebear/collection";
 
 export async function GET() {
   const options = {
     ...schema.properties,
-    ...micah.schema.properties,
+    ...avataaars.schema.properties,
   };
 
   console.log(options);

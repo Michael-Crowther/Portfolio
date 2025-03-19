@@ -25,6 +25,7 @@ import { ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useDebounceValue } from "usehooks-ts";
 import { CreateUser } from "@/components/forms/CreateUser";
+import { format } from "date-fns";
 
 type User = {
   id: string;
@@ -138,7 +139,10 @@ export function Demo() {
           )}
         >
           {createUser ? (
-            <CreateUser onBack={() => setCreateUser(false)} />
+            <CreateUser
+              onBack={() => setCreateUser(false)}
+              afterChanges={refetch}
+            />
           ) : !selectedUser ? (
             <>
               <CardContent className="flex flex-col gap-4 h-full">
@@ -154,7 +158,10 @@ export function Demo() {
                       onChange={(e) => setSearch(e.target.value)}
                       className="w-[250px] border-primary text-primary"
                     />
-                    <Button onClick={() => setCreateUser(true)}>
+                    <Button
+                      onClick={() => setCreateUser(true)}
+                      className="dark:bg-teal-100/90 shadow-sm cursor-pointer hover:bg-teal-500/40 bg-teal-500/50 text-primary dark:hover:bg-teal-100/80 dark:text-secondary justify-between"
+                    >
                       Create User
                     </Button>
 
@@ -377,7 +384,14 @@ function MessageInterface({
         </div>
         <div className="p-4 pt-3 items-center gap-2 flex flex-col">
           <p className="font-semibold text-xl">{selectedUser?.username}</p>
-          <p>Registered since Mar 13, 2025</p>
+          <p>
+            {selectedUser?.createdAt
+              ? `Registered since ${format(
+                  new Date(selectedUser.createdAt),
+                  "MMM dd, yyyy"
+                )}`
+              : ""}
+          </p>
         </div>
       </Card>
     </main>
