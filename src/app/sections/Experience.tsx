@@ -15,7 +15,7 @@ export function Experience() {
 
       <section className="sm:px-11 space-y-15 px-6">
         <ExperienceCard
-          date="OCTOBER 2023 - PRESENT"
+          date="OCTOBER 2022 - PRESENT"
           title="Full Stack Software Engineer • Wyssling Consulting"
           description="Developed a React, Node, and PostgreSQL CRM platform with a three-person team to manage solar projects for over 300 clients. This new system replaced an $8,000/month RDP server, significantly improving productivity, accuracy, and client satisfaction. I also created a suite of APIs to automate project submissions, drastically reducing turnaround times. Collaboration involved regular code reviews, frequent discussions on scalable design patterns, and organized feature planning. Finally, I set up automated deployments on AWS using GitHub, Elastic Beanstalk, EC2, and CodePipeline."
           tags={[
